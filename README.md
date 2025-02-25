@@ -78,10 +78,10 @@ If you use this work in your research, please cite:
 
 ```
 @misc{negative-time-machine,
-  author = {[Author Name]},
+  author = {[George Wagenknecht]},
   title = {Negative Time Machine: Exploring Chirality and Quantum Effects},
   year = {2025},
-  url = {https://github.com/[username]/negative-time-machine}
+  url = {https://github.com/gw67-alt/negative-time-machine}
 }
 ```
 
