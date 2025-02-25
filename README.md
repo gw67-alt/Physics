@@ -13,7 +13,7 @@ This repository contains theoretical models, simulations, and experimental proto
 - **Photon Source**: High-coherence laser (532nm/1550nm)
 - **Beam Splitter**: 50:50 dichroic with anti-reflection coating
 - **CO₂ Mirror**: High-reflectivity dielectric mirror
-- **Mechanical Blocking Oscillator**: Solid state actuator
+- **Mechanical Blocking Oscillator**: Solenoid actuator
 - **Photo Diodes**: Silicon PIN with <1ns response time
 - **Laplacian Operator**: Analog circuit for spatial derivatives
 - **2D Chiral Signal Analyzer**: FPGA-based signal processing
