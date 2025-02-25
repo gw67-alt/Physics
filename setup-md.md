@@ -30,7 +30,7 @@ This document provides detailed instructions for setting up the Negative Time Ma
 
 #### Grid Layout
 
-1. Using the reference layout diagram (see `schematics/layout.pdf`), mark component positions with temporary adhesive labels
+1. Using the reference layout diagram, mark component positions with temporary adhesive labels
 2. Install all primary optical mounts, leaving components themselves uninstalled
 3. Verify all mount positions with a precision ruler, tolerance ±0.5mm
 
