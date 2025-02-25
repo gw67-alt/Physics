@@ -124,20 +124,6 @@ This document provides detailed instructions for setting up the Negative Time Ma
 3. Run system self-test sequence from control software
 4. Validate open optical paths with alignment laser
 
-### Calibration Procedure
-
-1. Run the `calibration.py` script from the control computer
-2. Follow on-screen instructions for each component calibration
-3. Save calibration results to `calibration_data/` with timestamp
-4. Verify all parameters are within tolerance limits
-
-### Performance Verification
-
-1. Execute the `test_sequence.py` script
-2. Verify signal levels at all test points
-3. Confirm chiral signal detection with test pattern
-4. Document all measurements in the lab notebook
-
 ## Safety Considerations
 
 ### Laser Safety
