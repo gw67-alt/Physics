@@ -70,7 +70,12 @@ This document provides detailed instructions for setting up the Negative Time Ma
 1. Mount oscillator base plate at position D4
 2. Install piezoelectric actuator, securing with non-magnetic fasteners
 3. Attach blocking medium to actuator using the supplied mounting adapter
-4. Verify blocking medium intersects beam path completely when activated
+4. Install diffraction grating (1200 lines/mm) onto the blocking medium:
+   - Use the precision alignment jig to ensure grating lines are perpendicular to beam path
+   - Secure grating with cyanoacrylate adhesive applied at corners only
+   - Allow 24 hours curing time before operation
+   - Verify grating surface is free of dust particles using microscope inspection
+5. Verify blocking medium with grating intersects beam path completely when activated
 
 #### Electronic Connection
 
@@ -168,6 +173,7 @@ This document provides detailed instructions for setting up the Negative Time Ma
 | | EMI | Verify all shielding is intact |
 | Oscillator failure | Driver circuit issue | Check voltage levels on driver board |
 | | Mechanical binding | Inspect for physical obstruction |
+| | Grating damage | Examine grating surface under microscope |
 | No chiral signal | Misalignment | Re-run alignment procedure |
 | | Incorrect phase relationship | Adjust oscillator timing parameters |
 
