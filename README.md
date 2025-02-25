@@ -1,6 +1,6 @@
 # Negative Time Machine
 
-A theoretical exploration of quantum chirality and its relationship to temporal phenomena through optical and mechanical interactions.
+An experimental exploration of quantum chirality and its relationship to temporal phenomena through optical and mechanical interactions.
 
 ![Negative Time Machine Diagram](GknxFPIW4AA_sWD.png)
 
