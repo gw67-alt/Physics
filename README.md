@@ -2,7 +2,7 @@
 
 A theoretical exploration of quantum chirality and its relationship to temporal phenomena through optical and mechanical interactions.
 
-![Negative Time Machine Diagram](diagram.png)
+![Negative Time Machine Diagram]([diagram.png](GknxFPIW4AA_sWD.png))
 
 ## Project Overview
 
