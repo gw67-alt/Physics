@@ -68,7 +68,7 @@ This document provides detailed instructions for setting up the Negative Time Ma
 #### Mechanical Assembly
 
 1. Mount oscillator base plate at position D4
-2. Install piezoelectric actuator, securing with non-magnetic fasteners
+2. Install solid state actuator, securing with non-magnetic fasteners
 3. Attach blocking medium to actuator using the supplied mounting adapter
 4. Install diffraction grating (1200 lines/mm) onto the blocking medium:
    - Use the precision alignment jig to ensure grating lines are perpendicular to beam path
