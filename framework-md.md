@@ -30,7 +30,7 @@ Our framework draws inspiration from the Wheeler-Feynman absorber theory, which 
 
 ### Quantum Measurement and Observation
 
-The role of observation in quantum mechanics is central to our approach. The mechanical blocking oscillator acts as a quantum measurement device, potentially creating quantum states that exhibit time-asymmetric behavior through:
+The role of observation in quantum mechanics is central to our approach. The mechanical blocking oscillator with integrated diffraction grating acts as a quantum measurement device, potentially creating quantum states that exhibit time-asymmetric behavior through:
 
 1. Quantum entanglement between spatially separated photons
 2. Delayed-choice quantum eraser effects
