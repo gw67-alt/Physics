@@ -13,7 +13,7 @@ This repository contains theoretical models, simulations, and experimental proto
 - **Photon Source**: High-coherence laser (532nm/1550nm)
 - **Beam Splitter**: 50:50 dichroic with anti-reflection coating
 - **CO₂ Mirror**: High-reflectivity dielectric mirror
-- **Mechanical Blocking Oscillator**: Piezoelectric actuator (10kHz-1MHz)
+- **Mechanical Blocking Oscillator**: Solid state actuator
 - **Photo Diodes**: Silicon PIN with <1ns response time
 - **Laplacian Operator**: Analog circuit for spatial derivatives
 - **2D Chiral Signal Analyzer**: FPGA-based signal processing
@@ -61,10 +61,6 @@ Light from the photon source travels through multiple paths including reflection
 - Quantum optics simulation libraries
 - Signal processing tools
 - FPGA development environment
-
-## Contributing
-
-Contributions are welcome! Please read `CONTRIBUTING.md` for guidelines on how to submit contributions.
 
 ## License
 
