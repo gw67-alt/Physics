@@ -8,8 +8,6 @@ An experimental exploration of quantum chirality and its relationship to tempora
 
 This repository contains theoretical models, simulations, and experimental protocols for exploring "negative time" effects through manipulation of light intensity and chirality relationships. The project investigates whether quantum effects can produce signals with properties that appear to violate traditional temporal causality at small scales.
 
-> **Note**: This is a theoretical research project exploring quantum mechanics concepts and is not a practical time machine.
-
 ## Core Components
 
 - **Photon Source**: High-coherence laser (532nm/1550nm)
