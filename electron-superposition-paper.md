@@ -1,5 +1,8 @@
 # On the Limitations of Electron Superposition in Coherent Beams
 
+
+Author - George Wagenknecht, 8-March-2025
+
 ## Abstract
 
 This paper examines the theoretical and practical limitations of quantum superposition in the context of electron beams. While quantum mechanics traditionally describes particles as existing in superposition states, electrons present unique challenges due to their conserved charge and the requirements of coherent electron beams. We analyze how charge conservation constrains the quantum number states of electrons, particularly in coherent beam applications, and discuss the implications for quantum measurement and interpretation.
