@@ -5,5 +5,3 @@ So qubit A is int 1 and qubit B is int 2 it'd have 0.1 and 0.2 probabilities if 
 
 So qubit A is int 1 and qubit B is int 12 it'd have 0.01 and 0.12 probabilities if calibrated to int 100, merge those two together with a gate and it'd have a surface probability of 0.065
 
-0.065*10=6.5
-
