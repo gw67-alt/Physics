@@ -1,0 +1,9 @@
+If all grouped qubits are XOR'd it'd be the range/probability of each value per qubit, group them in different ways with gates, do combinatorics with the gates
+
+
+So qubit A is int 1 and qubit B is int 2 you'd get 0.1 and 0.2 probabilities if calibrated to int 10, merge those two together with a gate and you'd have a surface probability of 0.3 and local binding gives the result of 0.3*10=3
+
+So qubit A is int 1 and qubit B is int 12 you'd get 0.01 and 0.12 probabilities if calibrated to int 100, merge those two together with a gate and you'd have a surface probability of 0.13
+
+0.13*10=13
+
