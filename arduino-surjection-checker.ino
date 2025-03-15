@@ -1,8 +1,10 @@
 /*
- * Arduino Non-injective Surjective Analyzer
+ * Arduino Non-injective Surjective Analyzer with Auto-Start Triggering
  * 
- * This sketch automatically measures discrete analog values from two pins when powered up,
- * and automatically stops after collecting the specified number of samples.
+ * This sketch waits for both analog values to exceed a threshold, then automatically
+ * measures discrete analog values from two pins, and stops after collecting
+ * the specified number of samples. After analysis, it waits for another threshold event.
+ * 
  * It analyzes whether the mapping from set A to set B is:
  * 1. Surjective (onto): every element in B has at least one corresponding element in A
  * 2. Non-injective: at least one element in B has multiple elements from A mapping to it
@@ -18,12 +20,14 @@ const int ledPin = 13;        // LED to indicate recording status
 const int maxSamples = 17;    // Maximum number of samples to store
 const int discretizeLevels = 10; // Number of discrete levels to map analog values to
 const int sampleInterval = 500; // Time between samples in milliseconds
+const int signalThreshold = 512; // Threshold value (0-1023) that both signals must exceed to start
 
 // Arrays to store discretized values from both analog inputs
 int valuesA[maxSamples];
 int valuesB[maxSamples];
 int sampleCount = 0;
 bool analysisComplete = false;
+bool waitingForTrigger = true;
 
 // Arrays to store unique values found in each set
 int uniqueValuesA[discretizeLevels];
@@ -38,14 +42,45 @@ void setup() {
   Serial.begin(9600);
   pinMode(ledPin, OUTPUT);
   
-  Serial.println("Arduino Non-injective Surjective Analyzer");
-  Serial.println("Automatically collecting samples...");
+  Serial.println("Arduino Non-injective Surjective Analyzer with Auto-Start");
+  Serial.println("Waiting for both analog signals to exceed threshold...");
   
-  // Set LED on to indicate recording is active
-  digitalWrite(ledPin, HIGH);
+  // Blink LED slowly while waiting for trigger
+  slowBlinkLED();
 }
 
 void loop() {
+  // Check for trigger condition if we're waiting for it
+  if (waitingForTrigger) {
+    // Read raw analog values
+    int rawA = analogRead(analogPinA);
+    int rawB = analogRead(analogPinB);
+    
+    // Check if both values exceed threshold
+    if (rawA > signalThreshold && rawB > signalThreshold) {
+      Serial.print("Trigger detected! A=");
+      Serial.print(rawA);
+      Serial.print(", B=");
+      Serial.println(rawB);
+      
+      // Reset sample collection variables
+      sampleCount = 0;
+      analysisComplete = false;
+      waitingForTrigger = false;
+      
+      // Set LED solid on to indicate recording is active
+      digitalWrite(ledPin, HIGH);
+      Serial.println("Starting sample collection...");
+      
+      // Small delay to debounce and prepare
+      delay(500);
+    } else {
+      // Keep slow blinking while waiting
+      slowBlinkLED();
+      return; // Skip the rest of the loop
+    }
+  }
+
   // If we haven't completed analysis and haven't collected all samples
   if (!analysisComplete && sampleCount < maxSamples) {
     // Read analog values
@@ -70,11 +105,7 @@ void loop() {
     
     sampleCount++;
     
-    // Blink LED to indicate recording activity
-    digitalWrite(ledPin, LOW);
-    delay(100);
-    digitalWrite(ledPin, HIGH);
-    delay(sampleInterval - 100);  // Account for the blink time
+    delay(sampleInterval);
   }
   
   // If we've reached max samples and haven't analyzed yet
@@ -96,15 +127,22 @@ void loop() {
       digitalWrite(ledPin, LOW);
       delay(100);
     }
+    
+    // Reset to wait for next trigger
+    waitingForTrigger = true;
+    Serial.println("\nAnalysis complete. Waiting for next trigger event...");
   }
+}
+
+void slowBlinkLED() {
+  // Slow blink pattern to indicate waiting for trigger
+  static unsigned long lastBlinkTime = 0;
+  static bool ledState = false;
   
-  // If analysis is complete, just wait (or could implement a reset button here)
-  if (analysisComplete) {
-    // Flash LED once every 2 seconds to indicate idle state
-    digitalWrite(ledPin, HIGH);
-    delay(200);
-    digitalWrite(ledPin, LOW);
-    delay(1800);
+  if (millis() - lastBlinkTime > 500) {
+    ledState = !ledState;
+    digitalWrite(ledPin, ledState);
+    lastBlinkTime = millis();
   }
 }
 
