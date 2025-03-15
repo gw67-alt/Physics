@@ -44,7 +44,7 @@ Our experimental apparatus consists of several key components arranged in a hier
    
 7. **Deterministic Linker**: A system that ensures quantum entanglement between specific photon pairs to enhance detection of temporal effects.
    
-8. **Way Out and Pathway Elongation**: Specialized extensions of the apparatus designed to maximize the observable effects of temporal anomalies through controlled path length differences.
+8. **Way Out and Pathway Elongation**: the observable effects of temporal anomalies through controlled path length differences.
 
 The entire system maintains strict symmetry along the central axis, which is critical for the manifestation of the path finding effect under negative time conditions.
 
