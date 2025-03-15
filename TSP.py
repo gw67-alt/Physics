@@ -2,8 +2,9 @@ import numpy as np
 import random
 import hashlib
 import time
-from typing import List, Tuple, Dict, Set
+from typing import List, Tuple, Dict
 from math import radians, cos, sin, sqrt, atan2
+import matplotlib.pyplot as plt
 
 class TSPPartition:
     def __init__(self, cities: List[Tuple[float, float]], distance_threshold: float = 100.0, 
@@ -199,7 +200,7 @@ def example():
     # List of real places with their coordinates (latitude, longitude)
     real_places = [
         ("New York", (40.7128, -74.0060)),
-        ("Los Angeles", (34.0522, -118.2437)),
+         ("Los Angeles", (34.0522, -118.2437)),
         ("Chicago", (41.8781, -87.6298)),
         ("Houston", (29.7604, -95.3698)),
         ("Phoenix", (33.4484, -112.0740)),
@@ -372,7 +373,7 @@ def example():
         ("Dayton", (39.7589, -84.1916)),
         ("Pasadena", (29.6911, -95.2091)),
         ("Orange", (33.7879, -117.8531)),
-        ("Fullerton", (33.8704, -117.9243)),
+        ("Fullerton", (33.8704, -117.9243))
     ]
 
     # Extract coordinates from the list of places
@@ -392,8 +393,40 @@ def example():
 
     # Convert coordinates back to city names for clarity
     coord_to_city = {coords: name for name, coords in real_places}
-    path_names = [coord_to_city[city] for city in best_path]
+    path_names = [coord_to_city[coords] for coords in best_path]
     print(f"Best path (cities): {path_names}")
+
+    # Visualization using matplotlib
+    fig, ax = plt.subplots(figsize=(15, 10))
+
+    # Plot the cities as points
+    x_coords = [coord[1] for coord in cities]  # longitude
+    y_coords = [coord[0] for coord in cities]  # latitude
+    ax.scatter(x_coords, y_coords, color='blue', s=100)
+
+    # Plot the path
+    path_coords = best_path
+    path_coords.append(best_path[0])  # to make a complete loop
+    
+    path_x = [coord[1] for coord in path_coords]  # longitude
+    path_y = [coord[0] for coord in path_coords]  # latitude
+    ax.plot(path_x, path_y, 'r-', linewidth=2)
+
+    # Add city labels
+    for i, city in enumerate([name for name, _ in real_places]):
+        ax.annotate(city, (x_coords[i], y_coords[i]), fontsize=12, 
+                   xytext=(5, 5), textcoords='offset points')
+
+    plt.title('TSP Path Visualization', fontsize=16)
+    plt.xlabel('Longitude', fontsize=14)
+    plt.ylabel('Latitude', fontsize=14)
+    plt.grid(True)
+    
+    # Adjust the plot limits to show all US cities with some padding
+    ax.set_xlim(min(x_coords) - 5, max(x_coords) + 5)
+    ax.set_ylim(min(y_coords) - 5, max(y_coords) + 5)
+    
+    plt.show()
 
     return cities, best_path, best_distance
 
