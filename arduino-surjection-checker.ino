@@ -13,7 +13,7 @@ const int analogPinA = A0;    // Analog input pin for first set of values
 const int analogPinB = A1;    // Analog input pin for second set of values
 const int ledPin = 13;        // LED to indicate recording status
 
-const int maxSamples = 100;   // Maximum number of samples to store
+const int maxSamples = 17;   // Maximum number of samples to store
 const int discretizeLevels = 10; // Number of discrete levels to map analog values to
 const int sampleInterval = 500; // Time between samples in milliseconds
 
