@@ -1,29 +1,31 @@
 /*
- * Arduino Non-injective Surjective Analyzer
+ * Arduino Non-injective Surjective Analyzer with Threshold Triggering
  * 
- * This sketch automatically measures discrete analog values from two pins when powered up,
- * and automatically stops after collecting the specified number of samples.
+ * This sketch waits for both analog values to exceed a threshold, then automatically
+ * measures discrete analog values from two pins, and stops after collecting
+ * the specified number of samples.
  * It analyzes whether the mapping from set A to set B is:
  * 1. Surjective (onto): every element in B has at least one corresponding element in A
  * 2. Non-injective: at least one element in B has multiple elements from A mapping to it
  * 
- * A surjective non-injective relation is particularly useful in many applications
- * where we need many-to-one mappings that cover the entire codomain.
+ * After analysis, it returns to the waiting state, ready for another trigger event.
  */
 
 const int analogPinA = A0;    // Analog input pin for first set of values
 const int analogPinB = A1;    // Analog input pin for second set of values
 const int ledPin = 13;        // LED to indicate recording status
 
-const int maxSamples = 64;    // Maximum number of samples to store
+const int maxSamples = 32;    // Maximum number of samples to store
 const int discretizeLevels = 10; // Number of discrete levels to map analog values to
-const int sampleInterval = 500; // Time between samples in milliseconds
+const int sampleInterval = 35; // Time between samples in milliseconds
+const int signalThreshold = 680; // Threshold value (0-1023) that both signals must exceed to start
 
 // Arrays to store discretized values from both analog inputs
 int valuesA[maxSamples];
 int valuesB[maxSamples];
 int sampleCount = 0;
 bool analysisComplete = false;
+bool waitingForTrigger = true;
 
 // Arrays to store unique values found in each set
 int uniqueValuesA[discretizeLevels];
@@ -38,14 +40,42 @@ void setup() {
   Serial.begin(9600);
   pinMode(ledPin, OUTPUT);
   
-  Serial.println("Arduino Non-injective Surjective Analyzer");
-  Serial.println("Automatically collecting samples...");
-  
-  // Set LED on to indicate recording is active
-  digitalWrite(ledPin, HIGH);
+  Serial.println("Arduino Non-injective Surjective Analyzer with Threshold Triggering");
+  Serial.println("Waiting for both analog signals to exceed threshold...");
 }
 
 void loop() {
+  // Check for trigger condition if we're waiting for it
+  if (waitingForTrigger) {
+    // Read raw analog values
+    int rawA = analogRead(analogPinA);
+    int rawB = analogRead(analogPinB);
+    
+    // Slow blink LED to indicate waiting state
+    slowBlinkLED();
+    
+    // Check if both values exceed threshold
+    if (rawA > signalThreshold && rawB > signalThreshold) {
+      Serial.print("Trigger detected! A=");
+      Serial.print(rawA);
+      Serial.print(", B=");
+      Serial.println(rawB);
+      
+      // Reset sample collection variables
+      sampleCount = 0;
+      analysisComplete = false;
+      waitingForTrigger = false;
+      
+      // Set LED solid on to indicate recording will start
+      digitalWrite(ledPin, HIGH);
+      Serial.println("Starting sample collection...");
+      
+      // Small delay to debounce and prepare
+      delay(100);
+    }
+    return; // Skip the rest of the loop while waiting for trigger
+  }
+
   // If we haven't completed analysis and haven't collected all samples
   if (!analysisComplete && sampleCount < maxSamples) {
     // Read analog values
@@ -96,15 +126,23 @@ void loop() {
       digitalWrite(ledPin, LOW);
       delay(100);
     }
+    
+    // Reset to wait for next trigger
+    waitingForTrigger = true;
+    Serial.println("\nReady for next trigger event. Waiting for both analog signals to exceed threshold...");
   }
+}
+
+void slowBlinkLED() {
+  // Slow blink pattern for waiting state
+  static unsigned long lastToggleTime = 0;
+  static boolean ledState = false;
+  unsigned long currentTime = millis();
   
-  // If analysis is complete, just wait (or could implement a reset button here)
-  if (analysisComplete) {
-    // Flash LED once every 2 seconds to indicate idle state
-    digitalWrite(ledPin, HIGH);
-    delay(200);
-    digitalWrite(ledPin, LOW);
-    delay(1800);
+  if (currentTime - lastToggleTime > 500) {  // 0.5 second toggle
+    ledState = !ledState;
+    digitalWrite(ledPin, ledState);
+    lastToggleTime = currentTime;
   }
 }
 
