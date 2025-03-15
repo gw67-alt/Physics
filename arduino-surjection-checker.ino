@@ -1,19 +1,21 @@
 /*
- * Arduino Surjection Checker with Auto Start/Stop
+ * Arduino Non-injective Surjective Analyzer
  * 
- * This sketch automatically starts measuring discrete analog values from two pins when powered up,
+ * This sketch automatically measures discrete analog values from two pins when powered up,
  * and automatically stops after collecting the specified number of samples.
- * It then analyzes whether there's a surjection from set A to set B.
+ * It analyzes whether the mapping from set A to set B is:
+ * 1. Surjective (onto): every element in B has at least one corresponding element in A
+ * 2. Non-injective: at least one element in B has multiple elements from A mapping to it
  * 
- * A surjection (onto function) exists if every element in set B
- * has at least one corresponding element in set A that maps to it.
+ * A surjective non-injective relation is particularly useful in many applications
+ * where we need many-to-one mappings that cover the entire codomain.
  */
 
 const int analogPinA = A0;    // Analog input pin for first set of values
 const int analogPinB = A1;    // Analog input pin for second set of values
 const int ledPin = 13;        // LED to indicate recording status
 
-const int maxSamples = 17;   // Maximum number of samples to store
+const int maxSamples = 17;    // Maximum number of samples to store
 const int discretizeLevels = 10; // Number of discrete levels to map analog values to
 const int sampleInterval = 500; // Time between samples in milliseconds
 
@@ -29,14 +31,14 @@ int uniqueCountA = 0;
 int uniqueValuesB[discretizeLevels];
 int uniqueCountB = 0;
 
-// Mapping array to check surjection
+// Mapping array to check properties
 int mappingMatrix[discretizeLevels][discretizeLevels]; // [A][B]
 
 void setup() {
   Serial.begin(9600);
   pinMode(ledPin, OUTPUT);
   
-  Serial.println("Arduino Surjection Checker (Auto Mode)");
+  Serial.println("Arduino Non-injective Surjective Analyzer");
   Serial.println("Automatically collecting samples...");
   
   // Set LED on to indicate recording is active
@@ -146,8 +148,8 @@ void analyzeResults() {
   Serial.print(" unique values: ");
   printArray(uniqueValuesB, uniqueCountB);
   
-  // Check if there's a surjection from A to B
-  bool isSurjection = true;
+  // Check surjectivity (onto property)
+  bool isSurjective = true;
   for (int j = 0; j < uniqueCountB; j++) {
     int valueB = uniqueValuesB[j];
     bool hasPreimage = false;
@@ -161,22 +163,54 @@ void analyzeResults() {
     }
     
     if (!hasPreimage) {
-      isSurjection = false;
-      Serial.print("Value ");
+      isSurjective = false;
+      Serial.print("Value B=");
       Serial.print(valueB);
-      Serial.println(" in set B has no corresponding value in set A");
+      Serial.println(" has no corresponding value in set A (not surjective)");
     }
   }
   
-  // Print the conclusion
-  if (isSurjection) {
-    Serial.println("RESULT: There IS a surjection from set A to set B");
-  } else {
-    Serial.println("RESULT: There is NO surjection from set A to set B");
+  // Check non-injectivity (checking for many-to-one mappings)
+  bool isNonInjective = false;
+  for (int j = 0; j < uniqueCountB; j++) {
+    int valueB = uniqueValuesB[j];
+    int preimageCount = 0;
+    
+    for (int i = 0; i < uniqueCountA; i++) {
+      int valueA = uniqueValuesA[i];
+      if (mappingMatrix[valueA][valueB] > 0) {
+        preimageCount++;
+      }
+    }
+    
+    if (preimageCount > 1) {
+      isNonInjective = true;
+      Serial.print("Value B=");
+      Serial.print(valueB);
+      Serial.print(" has ");
+      Serial.print(preimageCount);
+      Serial.println(" different values from set A mapping to it (non-injective)");
+    }
   }
   
-  // Print mapping details
+  // Print function property conclusions
+  Serial.println("\n--- FUNCTION PROPERTY ANALYSIS ---");
+  if (isSurjective && isNonInjective) {
+    Serial.println("RESULT: The mapping IS Non-injective and Surjective (many-to-one and onto)");
+  } else if (isSurjective && !isNonInjective) {
+    Serial.println("RESULT: The mapping is Injective and Surjective (bijective/one-to-one and onto)");
+    Serial.println("  This is NOT the non-injective surjective mapping we're looking for");
+  } else if (!isSurjective && isNonInjective) {
+    Serial.println("RESULT: The mapping is Non-injective but NOT Surjective (many-to-one but not onto)");
+    Serial.println("  This is NOT the non-injective surjective mapping we're looking for");
+  } else {
+    Serial.println("RESULT: The mapping is neither Non-injective nor Surjective");
+    Serial.println("  This is NOT the non-injective surjective mapping we're looking for");
+  }
+  
+  // Print detailed mapping information
   Serial.println("\nMapping details:");
+  // For each unique value in A, show what it maps to
   for (int i = 0; i < uniqueCountA; i++) {
     int valueA = uniqueValuesA[i];
     Serial.print("A=");
@@ -192,11 +226,44 @@ void analyzeResults() {
         }
         Serial.print("B=");
         Serial.print(valueB);
-        Serial.print("(");
+        Serial.print(" (");
         Serial.print(mappingMatrix[valueA][valueB]);
         Serial.print(" times)");
         firstMapping = false;
       }
+    }
+    Serial.println();
+  }
+  
+  // For each unique value in B, show what maps to it
+  Serial.println("\nReverse mapping details:");
+  for (int j = 0; j < uniqueCountB; j++) {
+    int valueB = uniqueValuesB[j];
+    Serial.print("B=");
+    Serial.print(valueB);
+    Serial.print(" has preimages: ");
+    
+    bool firstMapping = true;
+    int preimageCount = 0;
+    for (int i = 0; i < uniqueCountA; i++) {
+      int valueA = uniqueValuesA[i];
+      if (mappingMatrix[valueA][valueB] > 0) {
+        if (!firstMapping) {
+          Serial.print(", ");
+        }
+        Serial.print("A=");
+        Serial.print(valueA);
+        firstMapping = false;
+        preimageCount++;
+      }
+    }
+    
+    if (preimageCount == 0) {
+      Serial.print("none (affects surjectivity)");
+    } else if (preimageCount == 1) {
+      Serial.print(" (injective for this value)");
+    } else {
+      Serial.print(" (non-injective for this value)");
     }
     Serial.println();
   }
