@@ -17,7 +17,7 @@ const int ledPin = 13;        // LED to indicate recording status
 
 const int maxSamples = 32;    // Maximum number of samples to store
 const int discretizeLevels = 10; // Number of discrete levels to map analog values to
-const int sampleInterval = 35; // Time between samples in milliseconds
+const int sampleInterval = 15; // Time between samples in milliseconds
 const int signalThreshold = 680; // Threshold value (0-1023) that both signals must exceed to start
 
 // Arrays to store discretized values from both analog inputs
