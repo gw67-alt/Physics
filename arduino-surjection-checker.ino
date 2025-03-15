@@ -1,8 +1,9 @@
 /*
- * Arduino Surjection Checker
+ * Arduino Surjection Checker with Auto Start/Stop
  * 
- * This sketch measures discrete analog values from two pins over time,
- * stores them as sets, and determines if there's a surjection from set A to set B.
+ * This sketch automatically starts measuring discrete analog values from two pins when powered up,
+ * and automatically stops after collecting the specified number of samples.
+ * It then analyzes whether there's a surjection from set A to set B.
  * 
  * A surjection (onto function) exists if every element in set B
  * has at least one corresponding element in set A that maps to it.
@@ -10,17 +11,17 @@
 
 const int analogPinA = A0;    // Analog input pin for first set of values
 const int analogPinB = A1;    // Analog input pin for second set of values
-const int buttonPin = 2;      // Digital pin for button to start/stop recording
 const int ledPin = 13;        // LED to indicate recording status
 
 const int maxSamples = 100;   // Maximum number of samples to store
 const int discretizeLevels = 10; // Number of discrete levels to map analog values to
+const int sampleInterval = 500; // Time between samples in milliseconds
 
 // Arrays to store discretized values from both analog inputs
 int valuesA[maxSamples];
 int valuesB[maxSamples];
 int sampleCount = 0;
-bool isRecording = false;
+bool analysisComplete = false;
 
 // Arrays to store unique values found in each set
 int uniqueValuesA[discretizeLevels];
@@ -33,26 +34,18 @@ int mappingMatrix[discretizeLevels][discretizeLevels]; // [A][B]
 
 void setup() {
   Serial.begin(9600);
-  pinMode(buttonPin, INPUT_PULLUP);
   pinMode(ledPin, OUTPUT);
   
-  Serial.println("Arduino Surjection Checker");
-  Serial.println("Press button to start/stop recording values");
-  Serial.println("Results will be analyzed after recording stops");
+  Serial.println("Arduino Surjection Checker (Auto Mode)");
+  Serial.println("Automatically collecting samples...");
+  
+  // Set LED on to indicate recording is active
+  digitalWrite(ledPin, HIGH);
 }
 
 void loop() {
-  // Check if button is pressed to toggle recording
-  if (digitalRead(buttonPin) == LOW) {
-    delay(50); // Debounce
-    if (digitalRead(buttonPin) == LOW) {
-      while (digitalRead(buttonPin) == LOW); // Wait for release
-      toggleRecording();
-    }
-  }
-  
-  // If recording and not at max samples, read values
-  if (isRecording && sampleCount < maxSamples) {
+  // If we haven't completed analysis and haven't collected all samples
+  if (!analysisComplete && sampleCount < maxSamples) {
     // Read analog values
     int rawA = analogRead(analogPinA);
     int rawB = analogRead(analogPinB);
@@ -75,46 +68,45 @@ void loop() {
     
     sampleCount++;
     
-    // Blink LED to indicate recording
-    digitalWrite(ledPin, HIGH);
+    // Blink LED to indicate recording activity
+    digitalWrite(ledPin, LOW);
     delay(100);
-    digitalWrite(ledPin, LOW);
-    delay(400);  // Take a sample roughly every 500ms
-  }
-  
-  // If we've reached max samples, stop recording
-  if (isRecording && sampleCount >= maxSamples) {
-    toggleRecording();
-    Serial.println("Maximum samples reached. Recording stopped.");
-  }
-}
-
-void toggleRecording() {
-  isRecording = !isRecording;
-  
-  if (isRecording) {
-    // Start a new recording session
-    sampleCount = 0;
-    Serial.println("Recording started...");
     digitalWrite(ledPin, HIGH);
-  } else {
-    // Stop recording and analyze results
-    Serial.println("Recording stopped.");
+    delay(sampleInterval - 100);  // Account for the blink time
+  }
+  
+  // If we've reached max samples and haven't analyzed yet
+  if (!analysisComplete && sampleCount >= maxSamples) {
+    // Turn off LED to indicate recording stopped
     digitalWrite(ledPin, LOW);
+    Serial.println("Sample collection complete. Analyzing results...");
+    
+    // Analyze the results
     analyzeResults();
+    
+    // Mark analysis as complete
+    analysisComplete = true;
+    
+    // Flash LED rapidly 5 times to indicate completion
+    for (int i = 0; i < 5; i++) {
+      digitalWrite(ledPin, HIGH);
+      delay(100);
+      digitalWrite(ledPin, LOW);
+      delay(100);
+    }
+  }
+  
+  // If analysis is complete, just wait (or could implement a reset button here)
+  if (analysisComplete) {
+    // Flash LED once every 2 seconds to indicate idle state
+    digitalWrite(ledPin, HIGH);
+    delay(200);
+    digitalWrite(ledPin, LOW);
+    delay(1800);
   }
 }
 
 void analyzeResults() {
-  if (sampleCount == 0) {
-    Serial.println("No samples recorded. Nothing to analyze.");
-    return;
-  }
-  
-  Serial.print("Analyzing ");
-  Serial.print(sampleCount);
-  Serial.println(" samples...");
-  
   // Reset analysis variables
   uniqueCountA = 0;
   uniqueCountB = 0;
