@@ -5,6 +5,7 @@ import time
 from typing import List, Tuple, Dict
 from math import radians, cos, sin, sqrt, atan2
 import matplotlib.pyplot as plt
+import mplcursors
 
 class TSPPartition:
     def __init__(self, cities: List[Tuple[float, float]], distance_threshold: float = 100.0, 
@@ -425,7 +426,7 @@ def example():
     # Adjust the plot limits to show all US cities with some padding
     ax.set_xlim(min(x_coords) - 5, max(x_coords) + 5)
     ax.set_ylim(min(y_coords) - 5, max(y_coords) + 5)
-    
+    mplcursors.cursor(hover=True)
     plt.show()
 
     return cities, best_path, best_distance
