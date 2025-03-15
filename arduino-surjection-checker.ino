@@ -15,7 +15,7 @@ const int analogPinA = A0;    // Analog input pin for first set of values
 const int analogPinB = A1;    // Analog input pin for second set of values
 const int ledPin = 13;        // LED to indicate recording status
 
-const int maxSamples = 32;    // Maximum number of samples to store
+const int maxSamples = 128;    // Maximum number of samples to store
 const int discretizeLevels = 10; // Number of discrete levels to map analog values to
 const int sampleInterval = 15; // Time between samples in milliseconds
 const int signalThreshold = 500; // Threshold value (0-1023) that both signals must exceed to start
@@ -56,10 +56,10 @@ void loop() {
     
     // Check if both values exceed threshold
     if (rawA > signalThreshold && rawB > signalThreshold) {
-      Serial.print("Trigger detected! A=");
-      Serial.print(rawA);
-      Serial.print(", B=");
-      Serial.println(rawB);
+     //Serial.print("Trigger detected! A=");
+      //Serial.print(rawA);
+      //Serial.print(", B=");
+      //Serial.println(rawB);
       
       // Reset sample collection variables
       sampleCount = 0;
@@ -68,7 +68,7 @@ void loop() {
       
       // Set LED solid on to indicate recording will start
       digitalWrite(ledPin, HIGH);
-      Serial.println("Starting sample collection...");
+      //Serial.println("Starting sample collection...");
       
       // Small delay to debounce and prepare
       delay(100);
@@ -91,13 +91,13 @@ void loop() {
     valuesB[sampleCount] = discreteB;
     
     // Print current reading
-    Serial.print("Sample ");
+    /*Serial.print("Sample ");
     Serial.print(sampleCount + 1);
     Serial.print(": A=");
     Serial.print(discreteA);
     Serial.print(", B=");
     Serial.println(discreteB);
-    
+    */
     sampleCount++;
     
     // Blink LED to indicate recording activity
@@ -111,7 +111,7 @@ void loop() {
   if (!analysisComplete && sampleCount >= maxSamples) {
     // Turn off LED to indicate recording stopped
     digitalWrite(ledPin, LOW);
-    Serial.println("Sample collection complete. Analyzing results...");
+    //Serial.println("Sample collection complete. Analyzing results...");
     
     // Analyze the results
     analyzeResults();
@@ -129,7 +129,7 @@ void loop() {
     
     // Reset to wait for next trigger
     waitingForTrigger = true;
-    Serial.println("\nReady for next trigger event. Waiting for both analog signals to exceed threshold...");
+    //Serial.println("\nReady for next trigger event. Waiting for both analog signals to exceed threshold...");
   }
 }
 
@@ -176,7 +176,7 @@ void analyzeResults() {
   }
   
   // Print unique values
-  Serial.print("Set A has ");
+  /*Serial.print("Set A has ");
   Serial.print(uniqueCountA);
   Serial.print(" unique values: ");
   printArray(uniqueValuesA, uniqueCountA);
@@ -185,7 +185,7 @@ void analyzeResults() {
   Serial.print(uniqueCountB);
   Serial.print(" unique values: ");
   printArray(uniqueValuesB, uniqueCountB);
-  
+ */ 
   // Check surjectivity (onto property)
   bool isSurjective = true;
   for (int j = 0; j < uniqueCountB; j++) {
@@ -202,9 +202,9 @@ void analyzeResults() {
     
     if (!hasPreimage) {
       isSurjective = false;
-      Serial.print("Value B=");
-      Serial.print(valueB);
-      Serial.println(" has no corresponding value in set A (not surjective)");
+      //Serial.print("Value B=");
+      //Serial.print(valueB);
+      //Serial.println(" has no corresponding value in set A (not surjective)");
     }
   }
   
@@ -223,11 +223,11 @@ void analyzeResults() {
     
     if (preimageCount > 1) {
       isNonInjective = true;
-      Serial.print("Value B=");
-      Serial.print(valueB);
-      Serial.print(" has ");
-      Serial.print(preimageCount);
-      Serial.println(" different values from set A mapping to it (non-injective)");
+      //Serial.print("Value B=");
+      //Serial.print(valueB);
+      //Serial.print(" has ");
+      //Serial.print(preimageCount);
+      //Serial.println(" different values from set A mapping to it (non-injective)");
     }
   }
   
@@ -247,26 +247,26 @@ void analyzeResults() {
   }
   
   // Print detailed mapping information
-  Serial.println("\nMapping details:");
+  //Serial.println("\nMapping details:");
   // For each unique value in A, show what it maps to
   for (int i = 0; i < uniqueCountA; i++) {
     int valueA = uniqueValuesA[i];
-    Serial.print("A=");
-    Serial.print(valueA);
-    Serial.print(" maps to: ");
+    //Serial.print("A=");
+    //Serial.print(valueA);
+   // Serial.print(" maps to: ");
     
     bool firstMapping = true;
     for (int j = 0; j < uniqueCountB; j++) {
       int valueB = uniqueValuesB[j];
       if (mappingMatrix[valueA][valueB] > 0) {
         if (!firstMapping) {
-          Serial.print(", ");
+          //Serial.print(", ");
         }
-        Serial.print("B=");
-        Serial.print(valueB);
-        Serial.print(" (");
-        Serial.print(mappingMatrix[valueA][valueB]);
-        Serial.print(" times)");
+        //Serial.print("B=");
+        //Serial.print(valueB);
+        //Serial.print(" (");
+        //Serial.print(mappingMatrix[valueA][valueB]);
+        //Serial.print(" times)");
         firstMapping = false;
       }
     }
@@ -274,12 +274,12 @@ void analyzeResults() {
   }
   
   // For each unique value in B, show what maps to it
-  Serial.println("\nReverse mapping details:");
+  //Serial.println("\nReverse mapping details:");
   for (int j = 0; j < uniqueCountB; j++) {
     int valueB = uniqueValuesB[j];
-    Serial.print("B=");
-    Serial.print(valueB);
-    Serial.print(" has preimages: ");
+    //Serial.print("B=");
+    //Serial.print(valueB);
+    //Serial.print(" has preimages: ");
     
     bool firstMapping = true;
     int preimageCount = 0;
@@ -287,21 +287,21 @@ void analyzeResults() {
       int valueA = uniqueValuesA[i];
       if (mappingMatrix[valueA][valueB] > 0) {
         if (!firstMapping) {
-          Serial.print(", ");
+          //Serial.print(", ");
         }
-        Serial.print("A=");
-        Serial.print(valueA);
+        //Serial.print("A=");
+        //Serial.print(valueA);
         firstMapping = false;
         preimageCount++;
       }
     }
     
     if (preimageCount == 0) {
-      Serial.print("none (affects surjectivity)");
+      //Serial.print("none (affects surjectivity)");
     } else if (preimageCount == 1) {
-      Serial.print(" (injective for this value)");
+      //Serial.print(" (injective for this value)");
     } else {
-      Serial.print(" (non-injective for this value)");
+      //Serial.print(" (non-injective for this value)");
     }
     Serial.println();
   }
@@ -319,12 +319,12 @@ bool contains(int arr[], int size, int value) {
 
 // Helper function to print an array
 void printArray(int arr[], int size) {
-  Serial.print("{");
+  //Serial.print("{");
   for (int i = 0; i < size; i++) {
-    Serial.print(arr[i]);
+    //Serial.print(arr[i]);
     if (i < size - 1) {
-      Serial.print(", ");
+      //Serial.print(", ");
     }
   }
-  Serial.println("}");
+  //Serial.println("}");
 }
