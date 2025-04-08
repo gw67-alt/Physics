@@ -1,8 +1,10 @@
+import sys
+sys.set_int_max_str_digits(1000000000)
 class EightBitNumberDisplay:
     def __init__(self):
         # Use 5 bits for mantissa and 3 bits for exponent
-        self.mantissa_bits = 5
-        self.exponent_bits = 3
+        self.mantissa_bits = 5000
+        self.exponent_bits = 3000
         self.mantissa = 0  # 5 bits (0-31)
         self.exponent = 0  # 3 bits (0-7)
     
@@ -97,42 +99,23 @@ class EightBitNumberDisplay:
 
 # Example usage with multiplication
 if __name__ == "__main__":
-    # Test regular number storage
-    print("=== Number Storage ===")
-    display = EightBitNumberDisplay()
-    test_numbers = [0, 10, 31, 32, 100, 500, 1000, 10000, 100000, 1000000]
-    
-    for num in test_numbers:
-        display.store_number(num)
-        print(f"Original: {num}, Stored: {display}")
-    
+
     # Test multiplication
-    print("\n=== Multiplication ===")
-    
-    # Example 1: Small numbers
-    num1 = EightBitNumberDisplay()
-    num1.store_number(10)
-    print(f"Starting with: {num1}")
-    num1.multiply(5)
-    print(f"After multiplying by 5: {num1}")
-    
-    # Example 2: Medium numbers
-    num2 = EightBitNumberDisplay()
-    num2.store_number(100)
-    print(f"\nStarting with: {num2}")
-    num2.multiply(20)
-    print(f"After multiplying by 20: {num2}")
-    
-    # Example 3: Large numbers
-    num3 = EightBitNumberDisplay()
-    num3.store_number(1000)
-    print(f"\nStarting with: {num3}")
-    num3.multiply(5000)
-    print(f"After multiplying by 5000: {num3}")
+    print("\n=== Algorithm ===")
+
     
     # Example 4: Very large numbers
-    num4 = EightBitNumberDisplay()
-    num4.store_number(100000)
-    print(f"\nStarting with: {num4}")
-    num4.multiply(10000)
-    print(f"After multiplying by 10000: {num4}")
+    num = EightBitNumberDisplay()
+    num.store_number(999)
+    print(f"\nStarting with: {num}")
+    arg = 8
+    for i in range(arg):
+        for j in range(arg):
+            for k in range(arg):
+                for l in range(arg):
+                    num.multiply(i+1)
+                    num.multiply(j+1)
+                    num.multiply(k+1)
+                    num.multiply(l+1)
+                    
+    print(f"After multiplying by: {num}")
