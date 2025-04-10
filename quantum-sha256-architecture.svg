@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background representing the silicon die -->
+  <rect x="50" y="50" width="700" height="500" rx="10" ry="10" fill="#f0f0f0" stroke="#333" stroke-width="2"/>
+  
+  <!-- Title and specifications -->
+  <text x="400" y="35" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold">Cr³⁺ Quantum SHA256 Architecture</text>
+  <text x="400" y="85" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">6196.77 TH/s | 1cm² Die | 50nm+ Periodic Array</text>
+  
+  <!-- Die dimensions indicator -->
+  <g transform="translate(60, 560)">
+    <line x1="0" y1="0" x2="680" y2="0" stroke="#333" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="0" y2="-5" stroke="#333" stroke-width="1.5"/>
+    <line x1="680" y1="0" x2="680" y2="-5" stroke="#333" stroke-width="1.5"/>
+    <text x="340" y="20" text-anchor="middle" font-family="Arial" font-size="14">1cm</text>
+  </g>
+  <g transform="translate(50, 60)">
+    <line x1="0" y1="0" x2="0" y2="480" stroke="#333" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="-5" y2="0" stroke="#333" stroke-width="1.5"/>
+    <line x1="0" y1="480" x2="-5" y2="480" stroke="#333" stroke-width="1.5"/>
+    <text x="-25" y="240" text-anchor="middle" font-family="Arial" font-size="14" transform="rotate(-90, -25, 240)">1cm</text>
+  </g>
+  
+  <!-- Central Cr3+ qubit array -->
+  <g transform="translate(400, 300)">
+    <!-- Qubit array background -->
+    <rect x="-200" y="-150" width="400" height="300" rx="5" ry="5" fill="#e6e6ff" stroke="#0000cc" stroke-width="1.5"/>
+    <text x="30" y="-130" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold">Cr³⁺ Qubit Array</text>
+    <text x="30" y="-115" text-anchor="middle" font-family="Arial" font-size="14">(50nm+ periodic spacing)</text>
+    
+    <!-- Periodic array representation -->
+    <g id="qubit-grid">
+      <!-- Grid lines -->
+      <g stroke="#aaa" stroke-width="0.5">
+        <!-- Vertical grid lines -->
+        <line x1="-150" y1="-100" x2="-150" y2="100"/>
+        <line x1="-100" y1="-100" x2="-100" y2="100"/>
+        <line x1="-50" y1="-100" x2="-50" y2="100"/>
+        <line x1="0" y1="-100" x2="0" y2="100"/>
+        <line x1="50" y1="-100" x2="50" y2="100"/>
+        <line x1="100" y1="-100" x2="100" y2="100"/>
+        <line x1="150" y1="-100" x2="150" y2="100"/>
+        
+        <!-- Horizontal grid lines -->
+        <line x1="-150" y1="-100" x2="150" y2="-100"/>
+        <line x1="-150" y1="-50" x2="150" y2="-50"/>
+        <line x1="-150" y1="0" x2="150" y2="0"/>
+        <line x1="-150" y1="50" x2="150" y2="50"/>
+        <line x1="-150" y1="100" x2="150" y2="100"/>
+      </g>
+      
+      <!-- Qubit representations -->
+      <g id="qubits" fill="#9933ff" stroke="#660099">
+        <!-- First row -->
+        <circle cx="-150" cy="-100" r="6"/>
+        <circle cx="-100" cy="-100" r="6"/>
+        <circle cx="-50" cy="-100" r="6"/>
+        <circle cx="0" cy="-100" r="6"/>
+        <circle cx="50" cy="-100" r="6"/>
+        <circle cx="100" cy="-100" r="6"/>
+        <circle cx="150" cy="-100" r="6"/>
+        
+        <!-- Second row -->
+        <circle cx="-150" cy="-50" r="6"/>
+        <circle cx="-100" cy="-50" r="6"/>
+        <circle cx="-50" cy="-50" r="6"/>
+        <circle cx="0" cy="-50" r="6"/>
+        <circle cx="50" cy="-50" r="6"/>
+        <circle cx="100" cy="-50" r="6"/>
+        <circle cx="150" cy="-50" r="6"/>
+        
+        <!-- Third row -->
+        <circle cx="-150" cy="0" r="6"/>
+        <circle cx="-100" cy="0" r="6"/>
+        <circle cx="-50" cy="0" r="6"/>
+        <circle cx="0" cy="0" r="6"/>
+        <circle cx="50" cy="0" r="6"/>
+        <circle cx="100" cy="0" r="6"/>
+        <circle cx="150" cy="0" r="6"/>
+        
+        <!-- Fourth row -->
+        <circle cx="-150" cy="50" r="6"/>
+        <circle cx="-100" cy="50" r="6"/>
+        <circle cx="-50" cy="50" r="6"/>
+        <circle cx="0" cy="50" r="6"/>
+        <circle cx="50" cy="50" r="6"/>
+        <circle cx="100" cy="50" r="6"/>
+        <circle cx="150" cy="50" r="6"/>
+        
+        <!-- Fifth row -->
+        <circle cx="-150" cy="100" r="6"/>
+        <circle cx="-100" cy="100" r="6"/>
+        <circle cx="-50" cy="100" r="6"/>
+        <circle cx="0" cy="100" r="6"/>
+        <circle cx="50" cy="100" r="6"/>
+        <circle cx="100" cy="100" r="6"/>
+        <circle cx="150" cy="100" r="6"/>
+      </g>
+    </g>
+    
+    <!-- Zoomed in qubit detail -->
+    <g transform="translate(-160, -80)">
+      <!-- Focus circle -->
+      <circle cx="0" cy="0" r="15" fill="none" stroke="#333" stroke-width="1" stroke-dasharray="4,2"/>
+      <line x1="15" y1="-15" x2="50" y2="-45" stroke="#333" stroke-width="1" stroke-dasharray="4,2"/>
+      
+      <!-- Zoomed view -->
+      <g transform="translate(80, -70)">
+        <circle cx="0" cy="0" r="40" fill="white" stroke="#333" stroke-width="1"/>
+        
+        <!-- Energy level diagram inside zoom -->
+        <g transform="translate(0, 0) scale(0.7)">
+          <!-- Energy level lines -->
+          <line x1="-30" y1="15" x2="30" y2="15" stroke="#0066cc" stroke-width="2"/>
+          <line x1="-30" y1="0" x2="30" y2="0" stroke="#0066cc" stroke-width="2"/>
+          <line x1="-30" y1="-15" x2="30" y2="-15" stroke="#0066cc" stroke-width="2"/>
+          
+          <!-- Cr3+ label -->
+          <text x="-40" y="0" text-anchor="end" font-family="Arial" font-size="10" font-weight="bold">Cr³⁺</text>
+          
+          <!-- State labels -->
+          <text x="35" y="15" text-anchor="start" font-family="Arial" font-size="8">-1/2</text>
+          <text x="35" y="0" text-anchor="start" font-family="Arial" font-size="8">0</text>
+          <text x="35" y="-15" text-anchor="start" font-family="Arial" font-size="8">+1/2</text>
+        </g>
+        
+        <text x="0" y="23" text-anchor="middle" font-family="Arial" font-size="9">Hyperfine</text>
+        <text x="0" y="31" text-anchor="middle" font-family="Arial" font-size="9">splitting</text>
+      </g>
+    </g>
+    
+    <!-- 50nm scale -->
+    <g transform="translate(120, 80)">
+      <line x1="-25" y1="0" x2="25" y2="0" stroke="#333" stroke-width="1"/>
+      <line x1="-25" y1="0" x2="-25" y2="-5" stroke="#333" stroke-width="1"/>
+      <line x1="25" y1="0" x2="25" y2="-5" stroke="#333" stroke-width="1"/>
+      <text x="0" y="15" text-anchor="middle" font-family="Arial" font-size="11">50nm</text>
+    </g>
+  </g>
+  
+  <!-- Spintronics control unit -->
+  <g transform="translate(160, 200)">
+    <rect x="0" y="0" width="120" height="80" rx="5" ry="5" fill="#ffcccc" stroke="#cc0000" stroke-width="1.5"/>
+    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold">Spintronics</text>
+    <text x="60" y="50" text-anchor="middle" font-family="Arial" font-size="13">Control Unit</text>
+    <text x="60" y="70" text-anchor="middle" font-family="Arial" font-size="11">(Qubit State Setting)</text>
+    
+    <!-- Connection lines to qubit array -->
+    <path d="M120,40 C170,40 170,200 200,200" fill="none" stroke="#cc0000" stroke-width="1.5" stroke-dasharray="5,3"/>
+  </g>
+  
+  <!-- NMR interface -->
+  <g transform="translate(600, 200)">
+    <rect x="0" y="0" width="120" height="80" rx="5" ry="5" fill="#b3d9ff" stroke="#0066cc" stroke-width="1.5"/>
+    <text x="60" y="30" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold">NMR Interface</text>
+    <text x="60" y="50" text-anchor="middle" font-family="Arial" font-size="13">Read/Write</text>
+    <text x="60" y="70" text-anchor="middle" font-family="Arial" font-size="11">(State Detection)</text>
+    
+    <!-- Connection lines to qubit array -->
+    <path d="M0,40 C-50,40 -50,200 -200,200" fill="none" stroke="#0066cc" stroke-width="1.5" stroke-dasharray="5,3"/>
+  </g>
+  
+  <!-- SHA256 processing unit -->
+  <g transform="translate(400, 480)">
+    <rect x="-150" y="0" width="300" height="60" rx="5" ry="5" fill="#d9f2d9" stroke="#006600" stroke-width="1.5"/>
+    <text x="0" y="25" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold">SHA256 Processing Unit</text>
+    <text x="0" y="45" text-anchor="middle" font-family="Arial" font-size="13">6196.77 TH/s Throughput</text>
+    
+    <!-- Connection line to qubit array -->
+    <path d="M0,0 C0,-20 0,-30 0,-30" fill="none" stroke="#006600" stroke-width="1.5
