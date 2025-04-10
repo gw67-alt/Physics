@@ -5,7 +5,7 @@
   
   <!-- Title and specifications -->
   <text x="400" y="35" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold">Cr³⁺ Quantum SHA256 Architecture</text>
-  <text x="400" y="85" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">6196.77 TH/s | 1cm² Die | 50nm+ Periodic Array</text>
+  <text x="400" y="85" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">615.384 PH/s  | 1cm² Die | 50nm+ Periodic Array</text>
   
   <!-- Die dimensions indicator -->
   <g transform="translate(60, 560)">
@@ -167,4 +167,6 @@
     <text x="0" y="45" text-anchor="middle" font-family="Arial" font-size="13">615.384 PH/s Throughput</text>
     
     <!-- Connection line to qubit array -->
-    <path d="M0,0 C0,-20 0,-30 0,-30" fill="none" stroke="#006600" stroke-width="1.5
+    <path d="M0,0 C0,-20 0,-30 0,-30" fill="none" stroke="#006600" stroke-width="1.5"/>
+  </g>
+</svg>
