@@ -1,0 +1,1 @@
+((Qubit count/(32bits squared))/SHA256 operation count)*timing interval(~50 Picoseconds = 20 billion) 
