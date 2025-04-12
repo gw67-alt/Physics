@@ -26,7 +26,7 @@
     <!-- Qubit array background -->
     <rect x="-200" y="-150" width="400" height="300" rx="5" ry="5" fill="#e6e6ff" stroke="#0000cc" stroke-width="1.5"/>
     <text x="30" y="-130" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold">Cr³⁺ Quantum Dot Array</text>
-    <text x="30" y="-115" text-anchor="middle" font-family="Arial" font-size="14">(50nm+ periodic spacing)</text>
+    <text x="35" y="-115" text-anchor="middle" font-family="Arial" font-size="14">(50nm+ periodic spacing)</text>
     
     <!-- Periodic array representation -->
     <g id="qubit-grid">
