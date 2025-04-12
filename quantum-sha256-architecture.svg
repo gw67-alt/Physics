@@ -134,7 +134,7 @@
       <line x1="-25" y1="0" x2="25" y2="0" stroke="#333" stroke-width="1"/>
       <line x1="-25" y1="0" x2="-25" y2="-5" stroke="#333" stroke-width="1"/>
       <line x1="25" y1="0" x2="25" y2="-5" stroke="#333" stroke-width="1"/>
-      <text x="0" y="15" text-anchor="middle" font-family="Arial" font-size="11">50nm</text>
+      <text x="0" y="15" text-anchor="middle" font-family="Arial" font-size="11">2nm</text>
     </g>
   </g>
 
