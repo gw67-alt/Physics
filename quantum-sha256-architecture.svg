@@ -5,7 +5,7 @@
   
   <!-- Title and specifications -->
   <text x="400" y="35" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold">Cr³⁺ Quantum SHA256 Architecture</text>
-  <text x="400" y="85" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">480.77 TH/s   | 1cm² Die | 50nm Periodic Array</text>
+  <text x="400" y="85" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">480.77 TH/s   | 1cm² Die | 5nm Periodic Array</text>
   
   <!-- Die dimensions indicator -->
   <g transform="translate(60, 560)">
