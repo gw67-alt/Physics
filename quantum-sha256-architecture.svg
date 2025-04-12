@@ -5,7 +5,7 @@
   
   <!-- Title and specifications -->
   <text x="400" y="35" text-anchor="middle" font-family="Arial" font-size="22" font-weight="bold">Cr³⁺ Quantum SHA256 Architecture</text>
-  <text x="400" y="85" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">480.77 TH/s   | 1cm² Die | 5nm Periodic Array</text>
+  <text x="400" y="85" text-anchor="middle" font-family="Arial" font-size="16" font-weight="bold">3.004 PH/s   | 1cm² Die | 2nm Periodic Array</text>
   
   <!-- Die dimensions indicator -->
   <g transform="translate(60, 560)">
@@ -26,7 +26,7 @@
     <!-- Qubit array background -->
     <rect x="-200" y="-150" width="400" height="300" rx="5" ry="5" fill="#e6e6ff" stroke="#0000cc" stroke-width="1.5"/>
     <text x="30" y="-130" text-anchor="middle" font-family="Arial" font-size="18" font-weight="bold">Cr³⁺ Quantum Dot Array</text>
-    <text x="45" y="-115" text-anchor="middle" font-family="Arial" font-size="14">(50nm+ periodic spacing)</text>
+    <text x="45" y="-115" text-anchor="middle" font-family="Arial" font-size="14">(2nm periodic spacing)</text>
     
     <!-- Periodic array representation -->
     <g id="qubit-grid">
@@ -162,7 +162,7 @@
   <g transform="translate(400, 480)">
     <rect x="-150" y="0" width="300" height="60" rx="5" ry="5" fill="#d9f2d9" stroke="#006600" stroke-width="1.5"/>
     <text x="0" y="25" text-anchor="middle" font-family="Arial" font-size="15" font-weight="bold">SHA256 Processing Unit</text>
-    <text x="0" y="45" text-anchor="middle" font-family="Arial" font-size="13">480.77 TH/s Throughput</text>
+    <text x="0" y="45" text-anchor="middle" font-family="Arial" font-size="13">3.004 PH/s Throughput</text>
     
     <!-- Connection line to qubit array -->
     <path d="M0,0 C0,-20 0,-30 0,-30" fill="none" stroke="#006600" stroke-width="1.5"/>
