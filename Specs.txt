@@ -1,0 +1,1 @@
+11.538 PH/s SHA256 at 10 micron NMR resolution at 20 picosecond latency. 3 axis gradient coils. Variable frequency electromagnet. Molybdenum mirror (1cm*1cm*0.3cm). Loop feedback circuit. High frequency data logger to store hashes.
