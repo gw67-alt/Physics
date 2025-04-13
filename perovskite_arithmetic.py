@@ -104,7 +104,7 @@ def quantize_crystal_dimension(desired_atoms, periodicity):
 if __name__ == "__main__":
     try:
         # Get input for desired number of atoms
-        atoms_str = input("Enter desired number of atoms (e.g., 5): ")
+        atoms_str = input("Enter desired number of atoms per period (e.g., 5): ")
         desired_atoms = int(atoms_str)
 
         # Get input for periodicity
