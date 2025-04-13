@@ -30,7 +30,7 @@ def quantize_peak_intervals(desired_peaks, periodic_hz):
             total_intervals = base_intervals + n
             
             # Start with a high maximum frequency
-            max_interval_freq = 1000  # Arbitrarily high starting point
+            max_interval_freq = 100000  # Arbitrarily high starting point
             
             while max_interval_freq > 0:
                 # Calculate interval time for this max frequency
@@ -119,9 +119,9 @@ if __name__ == "__main__":
         print("\nInterval Quantization:")
         print(f"  Result: {quantized_result['max_interval_frequency']:}")
         print(f"  Interval Period: {quantized_result['interval_period']:.4f} s")
-        print(f"  Base Intervals: {quantized_result['base_intervals']}")
-        print(f"  Additional Intervals: {quantized_result['additional_intervals']}")
-        print(f"  Total Intervals: {quantized_result['total_intervals']}")
+        print(f"  Base units: {quantized_result['base_intervals']}")
+        print(f"  Additional units: {quantized_result['additional_intervals']}")
+        print(f"  Total Perovskite units: {quantized_result['total_intervals']}")
         
         print("\nPeak Times:")
         for i, time in enumerate(peak_times, 1):
