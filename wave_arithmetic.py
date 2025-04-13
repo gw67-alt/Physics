@@ -117,7 +117,7 @@ if __name__ == "__main__":
         print(f"  Original Period: {quantized_result['original_period']:.4f} s")
         
         print("\nInterval Quantization:")
-        print(f"  Result: {quantized_result['max_interval_frequency']:.4f} Hz")
+        print(f"  Result: {quantized_result['max_interval_frequency']:}")
         print(f"  Interval Period: {quantized_result['interval_period']:.4f} s")
         print(f"  Base Intervals: {quantized_result['base_intervals']}")
         print(f"  Additional Intervals: {quantized_result['additional_intervals']}")
