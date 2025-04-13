@@ -129,8 +129,6 @@ if __name__ == "__main__":
         
         print("\nInterval Quantization:")
         print(f"  Result: {quantized_result['max_interval_frequency']:}")
-
-        print(f"  Total Intervals: {quantized_result['total_intervals']}")
         
         print("\n" + "=" * 50)
 
