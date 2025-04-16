@@ -205,8 +205,6 @@ def quantum_multiplication(a, b, sample_params=None):
 
 def test_algorithm_with_zeno_compensation(test_cases):
     """Test the multiplication algorithm with Zeno effect compensation"""
-    print("Quantum-Inspired Multiplication with Zeno Effect Compensation")
-    print("=============================================================")
     
     # Group numbers by product size for analysis
     grouped_cases = {
@@ -431,7 +429,7 @@ def main():
     test_cases = generate_test_cases(20, 1, 1000)
     
     print("Quantum-Inspired Multiplication without Direct a*b Calculation")
-    print("=============================================================")
+    print("==============================================================")
     
     # Test the algorithm with Zeno effect compensation
     group_results = test_algorithm_with_zeno_compensation(test_cases)
