@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="600" fill="#f0f5fa" />
+  
+  <!-- Title -->
+  <text x="400" y="50" font-family="Arial" font-size="24" text-anchor="middle" font-weight="bold">Quantum SHA256 Multiplication Unit Array</text>
+  <text x="400" y="80" font-family="Arial" font-size="16" text-anchor="middle">473.3728 TH/s on 1cm² die (42.25 μm² per unit)</text>
+  
+  <!-- Die representation -->
+  <rect x="100" y="120" width="600" height="300" fill="#e0e0e0" stroke="#000" stroke-width="2" />
+  
+  <!-- Grid of multiplication units (stylized) -->
+  <g id="multiplication-units">
+    <!-- Just showing a representative sample of the units -->
+    <g id="unit-grid">
+      <rect x="120" y="140" width="560" height="260" fill="none" stroke="#555" stroke-width="1" stroke-dasharray="5,5" />
+      
+      <!-- Sample units -->
+      <g>
+        <rect x="150" y="170" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        <rect x="180" y="170" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        <rect x="210" y="170" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        <rect x="240" y="170" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        <rect x="270" y="170" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        
+        <rect x="150" y="200" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        <rect x="180" y="200" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        <rect x="210" y="200" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        <rect x="240" y="200" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        <rect x="270" y="200" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        
+        <!-- Repeated pattern indicator -->
+        <text x="310" y="210" font-family="Arial" font-size="24" fill="#555">...</text>
+        
+        <rect x="350" y="170" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        <rect x="380" y="170" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        <rect x="410" y="170" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        
+        <rect x="350" y="200" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        <rect x="380" y="200" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        <rect x="410" y="200" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+        
+        <!-- Zoom in on one unit -->
+        <rect x="490" y="160" width="150" height="150" fill="#f8f8f8" stroke="#000" stroke-width="1" />
+        <text x="565" y="180" font-family="Arial" font-size="12" text-anchor="middle">Single Unit (42.25 μm²)</text>
+        
+        <rect x="510" y="190" width="110" height="110" fill="#d0e8ff" stroke="#000" stroke-width="1" />
+        
+        <!-- Components inside the zoomed unit -->
+        <rect x="520" y="205" width="90" height="25" fill="#ffd700" stroke="#000" stroke-width="1" rx="2" ry="2" />
+        <text x="565" y="221" font-family="Arial" font-size="10" text-anchor="middle">P=NP System</text>
+        
+        <rect x="520" y="240" width="40" height="15" fill="#ff9999" stroke="#000" stroke-width="1" />
+        <text x="540" y="251" font-family="Arial" font-size="8" text-anchor="middle">Eu Source</text>
+        
+        <rect x="570" y="240" width="40" height="15" fill="#99cc99" stroke="#000" stroke-width="1" />
+        <text x="590" y="251" font-family="Arial" font-size="8" text-anchor="middle">NiO Filter</text>
+        
+        <rect x="520" y="265" width="90" height="20" fill="#9999ff" stroke="#000" stroke-width="1" />
+        <text x="565" y="279" font-family="Arial" font-size="8" text-anchor="middle">BPW34 Photodiode</text>
+        
+        <!-- Timing -->
+        <line x1="540" y1="290" x2="600" y2="290" stroke="#000" stroke-width="1" />
+      </g>
+      
+      <text x="240" y="250" font-family="Arial" font-size="32" fill="#555">...</text>
+      <text x="380" y="250" font-family="Arial" font-size="32" fill="#555">...</text>
+      
+      <text x="240" y="320" font-family="Arial" font-size="32" fill="#555">...</text>
+      <text x="380" y="320" font-family="Arial" font-size="32" fill="#555">...</text>
+      
+      <rect x="150" y="350" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+      <rect x="180" y="350" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+      <rect x="210" y="350" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+      <rect x="240" y="350" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+      <rect x="270" y="350" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+      
+      <text x="310" y="360" font-family="Arial" font-size="24" fill="#555">...</text>
+      
+      <rect x="350" y="350" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+      <rect x="380" y="350" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+      <rect x="410" y="350" width="20" height="20" fill="#88ccff" stroke="#000" stroke-width="0.5" />
+    </g>
+  </g>
+  
+  <!-- Technical specifications -->
+  <g id="specifications">
+    <rect x="100" y="450" width="600" height="120" fill="#ddeeff" stroke="#000" stroke-width="1" rx="5" ry="5" />
+    <text x="400" y="475" font-family="Arial" font-size="18" text-anchor="middle" font-weight="bold">Technical Specifications</text>
+    
+    <text x="130" y="505" font-family="Arial" font-size="14">• Die Size: 1 cm² (10mm × 10mm)</text>
+    <text x="130" y="530" font-family="Arial" font-size="14">• Unit Area: 42.25 μm²</text>
+    <text x="130" y="555" font-family="Arial" font-size="14">• Processing Time: 5ns per hash</text>
+    
+    <text x="450" y="505" font-family="Arial" font-size="14">• Hash Rate: 473.3728 TH/s</text>
+    <text x="450" y="530" font-family="Arial" font-size="14">• Light: Europium source, NiO filter</text>
+    <text x="450" y="555" font-family="Arial" font-size="14">• Detector: BPW34 photodiode</text>
+  </g>
+</svg>
