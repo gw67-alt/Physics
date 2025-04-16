@@ -49,7 +49,7 @@ def evolve_quantum_state(a, b, t):
         phase_factor = np.exp(-1j * lambda_k * t)
         
         # Add contribution to state with amplitude encoding information about both factors
-        state += coefficient * phase_factor * np.exp(1j * 2 * np.pi * k * a / (a + b))
+        state += coefficient * phase_factor * np.exp(1j * 2 * np.pi * k * a / (a + b))*2
     
     return state
 
