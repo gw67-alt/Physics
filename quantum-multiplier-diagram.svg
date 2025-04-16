@@ -58,7 +58,7 @@
         <text x="590" y="251" font-family="Arial" font-size="8" text-anchor="middle">NiO Filter</text>
         
         <rect x="520" y="265" width="90" height="20" fill="#9999ff" stroke="#000" stroke-width="1" />
-        <text x="565" y="279" font-family="Arial" font-size="8" text-anchor="middle"> Germanium selenide</text>
+        <text x="565" y="279" font-family="Arial" font-size="8" text-anchor="middle">Germanium selenide</text>
         
         <!-- Timing -->
         <line x1="540" y1="290" x2="600" y2="290" stroke="#000" stroke-width="1" />
@@ -95,6 +95,6 @@
     
     <text x="450" y="505" font-family="Arial" font-size="14">• Hash Rate: 473.3728 TH/s</text>
     <text x="450" y="530" font-family="Arial" font-size="14">• Light: Europium source, NiO filter</text>
-    <text x="450" y="555" font-family="Arial" font-size="14">• Detector: BPW34 photodiode</text>
+    <text x="450" y="555" font-family="Arial" font-size="14">• Detector: Germanium selenide</text>
   </g>
 </svg>
