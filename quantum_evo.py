@@ -338,7 +338,7 @@ def visualize_complex_waves(a, b):
     
     print(f"Phase visualization saved to complex_wave_phase_{a}_{b}.png")
 
-def generate_test_cases(num_cases=10, min_val=2, max_val=100):
+def generate_test_cases(num_cases=10, min_val=2, max_val=100000):
     """Generate random pairs of numbers for test cases."""
     test_cases = []
     for _ in range(num_cases):
@@ -353,12 +353,8 @@ def main():
     np.random.seed(42)
     
     # Define test cases
-    test_cases = [
-        (7, 11),    # 77
-        (12, 13),   # 156
-        (19, 23),   # 437
-        (31, 37),   # 1147
-    ]
+    test_cases = generate_test_cases()
+
     
     # Add some random test cases
     test_cases.extend(generate_test_cases(6, 2, 50))
