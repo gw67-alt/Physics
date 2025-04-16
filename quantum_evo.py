@@ -148,7 +148,7 @@ def quantum_multiplication(a, b, sample_params=None):
         ((a + b) * min(a, b) / 2) * 
         (1 + oscillation_factor * phase_variance * size_factor) *
         (frequency_ratio + 0.5) * (1 + np.sqrt(amplitude_variance))
-    ))
+    ))*2
     
     # Calculate confidence based on quantum metrics, without using the actual product
     # High phase coherence (low variance) indicates higher confidence
@@ -426,7 +426,7 @@ def main():
     random.seed(42)
     
     # Generate random test cases
-    test_cases = generate_test_cases(20, 1, 1000)
+    test_cases = generate_test_cases(20, 1, 100000)
     
     print("Quantum-Inspired Multiplication without Direct a*b Calculation")
     print("==============================================================")
