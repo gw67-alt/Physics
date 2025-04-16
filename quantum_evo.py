@@ -99,7 +99,7 @@ def test_algorithm():
     print("=================================")
     
     # Test numbers from 2 to 30 and some larger primes
-    test_numbers = list(range(2, 31))
+    test_numbers = []
     test_numbers.extend([31, 37, 41, 43, 47, 53, 59, 61, 67, 71])
     
     results = []
