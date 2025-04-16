@@ -58,7 +58,7 @@
         <text x="590" y="251" font-family="Arial" font-size="8" text-anchor="middle">NiO Filter</text>
         
         <rect x="520" y="265" width="90" height="20" fill="#9999ff" stroke="#000" stroke-width="1" />
-        <text x="565" y="279" font-family="Arial" font-size="8" text-anchor="middle">Cadmium Sulfide</text>
+        <text x="565" y="279" font-family="Arial" font-size="8" text-anchor="middle"> Silicon photodiode</text>
         
         <!-- Timing -->
         <line x1="540" y1="290" x2="600" y2="290" stroke="#000" stroke-width="1" />
