@@ -97,10 +97,11 @@ def test_algorithm():
     """Test the quantum primality algorithm on a range of numbers"""
     print("Quantum-Inspired Primality Testing")
     print("=================================")
+    test_numbers = []
     
     # Test numbers from 2 to 30 and some larger primes
-    test_numbers = []
-    test_numbers.extend([31, 37, 41, 43, 47, 53, 59, 61, 67, 71])
+    #test_numbers = list(range(2, 31)) # for some reason problems arent quickly solvable
+    test_numbers.extend([31, 37, 41, 43, 47, 53, 59, 61, 67, 71]) # for some reason solutions are quickly checkable
     
     results = []
     correct = 0
