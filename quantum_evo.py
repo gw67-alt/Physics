@@ -340,20 +340,6 @@ def analyze_time_complexity():
     print("   for larger numbers, resulting in exponential complexity")
     print("3. The adaptive time range effectively counteracts the Zeno effect")
     
-    # Calculate theoretical time ranges without compensation
-    print("\nTheoretical time ranges required without Zeno compensation:")
-    for n in test_numbers:
-        # Without compensation, time range would be constant
-        uncompensated_range = 1.0
-        
-        # With compensation (as actually used in our algorithm)
-        compensated_range = adaptive_sampling_parameters(n)["time_range"]
-        
-        # Theoretical speedup
-        speedup = uncompensated_range / compensated_range if compensated_range > 0 else float('inf')
-        
-        print(f"n = {n}: {uncompensated_range:.2f} vs. {compensated_range:.6f} (Speedup: {speedup:.1f}x)")
-
 def main():
     print("Quantum-Inspired Primality Testing with Zeno Effect Analysis")
     print("===========================================================")
