@@ -1,3 +1,4 @@
+
 import numpy as np
 import matplotlib.pyplot as plt
 import time
@@ -355,10 +356,6 @@ def main():
     # Define test cases
     test_cases = generate_test_cases()
 
-    
-    # Add some random test cases
-    test_cases.extend(generate_test_cases(6, 2, 50))
-    
     print("Multiplication via Complex Wave Interference")
     print("==========================================")
     print("This algorithm estimates products by analyzing how complex waves")
