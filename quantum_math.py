@@ -1,159 +1,186 @@
 import numpy as np
 import matplotlib.pyplot as plt
-import sys
-import time # Import the time module
+from scipy.optimize import fsolve
+import sys # To exit gracefully if needed
 
-# Define the number of points for intersection finding - higher values increase accuracy but slow down computation
-NUM_INTERSECTION_POINTS = 10000 # Keep reasonably high for accuracy
+# Define the number of points for intersection finding
+NUM_INTERSECTION_POINTS = 10000  # You can adjust this value if needed
 
-def multiply_by_wave_amplitude(a, b, num_points=NUM_INTERSECTION_POINTS): # Pass num_points as argument
+# Define the equation function outside count_intersections 
+# so fsolve can access it without scope issues if needed, though nested is fine here.
+def equation(t_val, constant_freq, variable_freq):
+    return np.sin(constant_freq * t_val) - np.sin(variable_freq * t_val)
+
+def count_intersections(constant_freq, variable_freq, t_max, num_points=NUM_INTERSECTION_POINTS):
     """
-    Calculates a * b using the average of the product of two sine waves
-    with amplitudes a and b and the same frequency. Includes performance metrics.
+    Count the number of intersections between two sine waves:
+    - constant sine wave: sin(constant_freq * t)
+    - variable sine wave: sin(variable_freq * t)
+
+    Returns the count and the intersection points (times).
     """
-    print(f"\nCalculating {a} * {b} using wave amplitude multiplication...")
-    print(f"  Using num_points = {num_points}")
+    t = np.linspace(0, t_max, num_points)
+    wave1 = np.sin(constant_freq * t)
+    wave2 = np.sin(variable_freq * t)
 
-    # --- Start Timing ---
-    start_time = time.perf_counter() # Use performance counter for higher resolution
+    # Find sign changes in the difference, which indicate potential intersections
+    diff = wave1 - wave2
+    sign_changes_indices = np.where(np.diff(np.signbit(diff)))[0]
 
-    # 1. Define wave parameters
-    omega = 2 * np.pi  # Angular frequency (e.g., 2*pi for frequency = 1 Hz)
-    frequency = omega / (2 * np.pi)
-    period = 1 / frequency
-    # Simulate for exactly 2 full cycles for robust averaging
-    t_max = period * 2
-    # Generate time vector - use endpoint=False for cleaner average over whole cycles
-    t = np.linspace(0, t_max, num_points, endpoint=False)
+    # Refine the intersection points using fsolve
+    intersections_t = []
+    # Store unique roots to avoid duplicates if fsolve converges to the same point from nearby guesses
+    # Use a tolerance for uniqueness check
+    tolerance = 1e-8 # Increased precision for fsolve comparison
+    unique_roots_rounded = set()
 
-    # 2. Create the two waves with amplitudes a and b
-    y1 = a * np.sin(omega * t)
-    y2 = b * np.sin(omega * t)
+    # Check t=0 explicitly as sign change might miss it
+    if abs(equation(0.0, constant_freq, variable_freq)) < tolerance:
+         intersections_t.append(0.0)
+         unique_roots_rounded.add(round(0.0, 7)) # Use rounding for set uniqueness check
 
-    # 3. Create the product wave
-    y_mult = y1 * y2
-    # Theoretical product wave: (a*b/2) - (a*b/2)*np.cos(2*omega*t)
+    for idx in sign_changes_indices:
+        # Use the midpoint of the interval where sign change occurred as initial guess
+        t_approx = (t[idx] + t[idx+1]) / 2
 
-    # 4. Calculate the average value of the product wave
-    # Average over the whole simulation time (multiple of period)
-    avg_val = np.mean(y_mult)
+        try:
+            # Pass additional arguments (constants) to fsolve using args=()
+            t_precise = fsolve(equation, t_approx, args=(constant_freq, variable_freq), xtol=tolerance)[0]
 
-    # 5. Calculate the product a * b
-    product_ab = 2 * avg_val
+            # Check if the root is within the desired range [0, t_max]
+            # and if the function value is close to zero
+            if 0 <= t_precise <= t_max and abs(equation(t_precise, constant_freq, variable_freq)) < 1e-5:
+                 # Check for uniqueness using rounded values to handle floating point inaccuracies
+                 t_rounded = round(t_precise, 7)
+                 if t_rounded not in unique_roots_rounded:
+                    intersections_t.append(t_precise)
+                    unique_roots_rounded.add(t_rounded)
 
-    # --- End Timing ---
-    end_time = time.perf_counter()
-    duration_ms = (end_time - start_time) * 1000 # Duration in milliseconds
+        except Exception as e:
+            # fsolve might fail in some cases, e.g., if gradient is zero
+            # print(f"fsolve warning near t={t_approx} for freq={variable_freq}: {e}")
+            pass # Silently ignore fsolve failures for this example
 
-    # --- Results and Performance Metrics ---
-    print("\n--- Results ---")
-    print(f"  Wave 1: y1(t) = {a} * sin({omega:.2f}*t)")
-    print(f"  Wave 2: y2(t) = {b} * sin({omega:.2f}*t)")
-    print(f"  Product Wave: y_mult(t) = y1(t) * y2(t)")
-    print(f"  Average value of y_mult(t) = {avg_val:.6f}") # Increased precision
-    print(f"  Calculated Product (2 * Average) = {product_ab:.6f}") # Increased precision
-    print(f"  Direct Calculation: {a} * {b} = {a*b}")
+    # Check t=t_max explicitly
+    if abs(equation(t_max, constant_freq, variable_freq)) < tolerance:
+        t_rounded = round(t_max, 7)
+        if t_rounded not in unique_roots_rounded:
+             intersections_t.append(t_max)
+             unique_roots_rounded.add(t_rounded)
 
-    print("\n--- Performance Metrics ---")
-    print(f"  Calculation Time: {duration_ms:.4f} ms")
-    print(f"  Number of Points (num_points): {num_points}")
+    # Sort the final list of unique intersections
+    intersections_t.sort()
 
-    # Accuracy / Error Calculation
-    direct_product = a*b
-    absolute_error = abs(direct_product - product_ab)
-    print(f"  Absolute Error: {absolute_error:.6e}") # Use scientific notation for small errors
+    # Filter out any points slightly outside the bounds due to numerical issues
+    intersections_t = [p for p in intersections_t if 0 <= p <= t_max]
 
-    # Calculate relative error, handle division by zero
-    if abs(direct_product) > 1e-12: # Avoid division by zero or near-zero
-         relative_error_percent = (absolute_error / abs(direct_product)) * 100
-         print(f"  Relative Error: {relative_error_percent:.6f} %")
-    elif absolute_error < 1e-12: # If both are zero
-         print("  Relative Error: 0.00 % (Exact)")
-    else: # If direct is zero but calculated is not
-         print("  Relative Error: N/A (Direct product is zero)")
-    print("-" * 27)
-    # --- End Performance Metrics ---
+    return len(intersections_t), np.array(intersections_t) # Return as numpy array
+
+def is_prime(n):
+    """Check if a number is prime"""
+    if n <= 1:
+        return False
+    if n <= 3:
+        return True
+    if n % 2 == 0 or n % 3 == 0:
+        return False
+    i = 5
+    # Corrected loop condition for prime check
+    while i * i <= n:
+        if n % i == 0 or n % (i + 2) == 0:
+            return False
+        i += 6
+    return True
+
+def find_prime_by_intersections(constant_freq=1.0, max_variable_freq=100, t_max=2*np.pi):
+    """
+    Find a prime number by counting intersections between a constant sine wave
+    and variable sine waves with different frequencies.
+    """
+    print(f"Searching for prime intersection counts up to max variable frequency {max_variable_freq}...")
+    found_primes = {} # Store found primes and their corresponding frequencies
+
+    for var_freq in range(2, max_variable_freq + 1):
+        count, _ = count_intersections(constant_freq, var_freq, t_max)
+        # print(f"Freq={var_freq}, Intersections={count}") # Uncomment for debugging counts
+
+        # Check if the count is prime
+        if count > 1 and is_prime(count): # Ensure count > 1 as 1 is not prime
+            print(f"--> Found prime intersection count {count} with variable frequency {var_freq}")
+            if count not in found_primes:
+                 found_primes[count] = []
+            found_primes[count].append(var_freq)
+            # Optional: Return first found if needed
+            # return count, var_freq
+
+    if not found_primes:
+        print("No prime intersection counts found within the specified range.")
+        return None, None, None # Return None for intersections as well
+    else:
+        # Return the first prime found (smallest prime number count)
+        first_prime = min(found_primes.keys())
+        first_freq = found_primes[first_prime][0]
+        print(f"\nReturning the first prime count found: {first_prime} (from frequency {first_freq})")
+        # Recalculate intersections for the first prime found to return them
+        final_count, final_intersections = count_intersections(constant_freq, first_freq, t_max)
+        return first_prime, first_freq, final_intersections
+
+# Visualize the waves
+def plot_waves(constant_freq, variable_freq, t_max, intersections): # Pass intersections as argument
+    """ Plots the two waves and their intersection points """
+    t = np.linspace(0, t_max, 1000) # Use enough points for smooth plot
+    wave1 = np.sin(constant_freq * t)
+    wave2 = np.sin(variable_freq * t)
+
+    plt.figure(figsize=(10, 6))
+    plt.plot(t, wave1, label=f'sin({constant_freq}t)')
+    plt.plot(t, wave2, label=f'sin({variable_freq}t)')
+
+    if intersections is not None and len(intersections) > 0:
+        plt.scatter(intersections, np.sin(constant_freq * intersections),
+                    color='red', zorder=5, label=f'Intersections ({len(intersections)})')
+    else:
+         plt.text(0.5, 0.5, 'No intersections found or calculated', horizontalalignment='center', verticalalignment='center', transform=plt.gca().transAxes)
 
 
-    # 6. Plotting
-    print("\nGenerating plots...")
-    plt.figure(figsize=(12, 9))
-
-    # Plot y1 and y2
-    plt.subplot(3, 1, 1) # 3 rows, 1 column, 1st subplot
-    plt.plot(t, y1, label=f'$y_1(t) = {a} \sin({omega:.1f}t)$')
-    plt.plot(t, y2, label=f'$y_2(t) = {b} \sin({omega:.1f}t)$', linestyle='--')
-    plt.title('Input Waves')
-    plt.ylabel('Amplitude')
     plt.grid(True)
     plt.legend()
-    plt.tick_params(axis='x', labelbottom=False) # Hide x-axis labels for this plot
-
-    # Plot y_mult
-    plt.subplot(3, 1, 2) # 3 rows, 1 column, 2nd subplot
-    plt.plot(t, y_mult, label='$y_{mult}(t) = y_1(t) \\times y_2(t)$', color='purple')
-    # Plot the average value line
-    plt.axhline(avg_val, color='red', linestyle=':', lw=2,
-                label=f'Avg Value (Calculated) = {avg_val:.4f}')
-    # Plot the theoretical DC component line
-    plt.axhline(a*b/2, color='green', linestyle='-.', lw=1,
-                label=f'Theoretical DC Offset = {a*b/2:.4f}')
-
-    plt.title('Product Wave and its Average Value')
+    plt.title(f'Intersections of sin({constant_freq}t) and sin({variable_freq}t)')
+    plt.xlabel('t')
     plt.ylabel('Amplitude')
-    plt.grid(True)
-    plt.legend()
-    plt.tick_params(axis='x', labelbottom=False) # Hide x-axis labels for this plot
-
-    # Plot y_mult and its components for verification (optional)
-    plt.subplot(3, 1, 3)
-    dc_comp = np.full_like(t, a*b/2)
-    ac_comp = -(a*b/2) * np.cos(2*omega*t)
-    plt.plot(t, y_mult, label='$y_{mult}(t)$', color='purple', lw=2, alpha=0.6)
-    plt.plot(t, dc_comp, label=f'DC Component = {a*b/2:.2f}', color='green', linestyle='--')
-    plt.plot(t, ac_comp, label=f'AC Component = $({-a*b/2:.2f}) \cos({2*omega:.1f}t)$', color='orange', linestyle=':')
-    plt.title('Product Wave Decomposed (Theoretical)')
-    plt.xlabel('Time (t)')
-    plt.ylabel('Amplitude')
-    plt.grid(True)
-    plt.legend()
-
-    plt.tight_layout() # Adjust spacing between subplots
+    plt.ylim(-1.1, 1.1)
     plt.show()
 
-    return product_ab
-
 # --- Main Execution ---
-if __name__ == "__main__":
-    # Allow setting num_points via command line argument or use default
-    points = NUM_INTERSECTION_POINTS # Default
-    if len(sys.argv) > 1:
-        try:
-            points = int(sys.argv[1])
-            print(f"[ Using num_points = {points} from command line ]")
-        except ValueError:
-            print(f"[ Warning: Invalid command line argument '{sys.argv[1]}'. Using default num_points = {points}. ]")
+# Define constants
+CONSTANT_FREQ = 1.0
+MAX_VARIABLE_FREQ = 100 # Adjust as needed
+T_MAX = 2 * np.pi
 
-    while True:
-        try:
-            a_str = input("Enter the first number (a): ")
-            if a_str.lower() == 'exit': sys.exit()
-            A = float(a_str)
+print(f"Comparing sin({CONSTANT_FREQ}t) against sin(f*t) for f = 2 to {MAX_VARIABLE_FREQ}")
+print(f"Interval: t = [0, {T_MAX:.4f}]")
+print(f"Number of points for intersection detection: {NUM_INTERSECTION_POINTS}")
 
-            b_str = input("Enter the second number (b): ")
-            if b_str.lower() == 'exit': sys.exit()
-            B = float(b_str)
+# --- Section for Multiplication using Amplitude (from previous request) ---
+# This part remains separate as it addresses a different concept
 
-            # Pass the number of points to the function
-            result = multiply_by_wave_amplitude(A, B, num_points=points)
+def multiply_using_amplitude_average(a, b, omega=2*np.pi, num_points=1000):
+    """ Calculates a*b using the average of wave products. """
+    print(f"\n--- Amplitude Multiplication Example ---")
+    print(f"Calculating {a} * {b}")
+    t = np.linspace(0, 2*np.pi/omega, num_points, endpoint=False)
+    wave1 = a * np.sin(omega * t)
+    wave2 = b * np.sin(omega * t)
+    product_wave = wave1 * wave2
+    average_value = np.mean(product_wave)
+    calculated_product = 2 * average_value
+    print(f"  Wave 1 Amplitude: {a}")
+    print(f"  Wave 2 Amplitude: {b}")
+    print(f"  Average of Product Wave: {average_value:.4f}")
+    print(f"  Calculated Product (2 * Average): {calculated_product:.4f}")
+    print(f"  Actual Product (a * b): {a * b}")
+    print("-" * 40)
 
-        except ValueError:
-            print("Invalid input. Please enter numerical values for a and b (or type 'exit').")
-        except KeyboardInterrupt:
-            sys.exit("\nExiting.")
-
-        try_again = input("\nTry another multiplication? (yes/no): ").lower()
-        if try_again != 'yes' and try_again != 'y':
-            break
-
-    print("\nDone.")
+# Example usage for amplitude multiplication
+print("\nTesting amplitude multiplication method:")
+multiply_using_amplitude_average(5, 7)
