@@ -310,13 +310,13 @@ def test_algorithm(test_cases):
     results = []
 
     for i, (a, b) in enumerate(test_cases):
-        print(f"Running case {i+1}/{len(test_cases)}: ({a}, {b})... ", end='', flush=True)
+        #print(f"Running case {i+1}/{len(test_cases)}: ({a}, {b})... ", end='', flush=True)
         start_time = time.time()
         result = complex_wave_multiplication(a, b)
         end_time = time.time()
         result['time_taken'] = end_time - start_time
         results.append(result)
-        print(f"done in {result['time_taken']:.2f}s")
+        #print(f"done in {result['time_taken']:.2f}s")
 
         is_valid = not np.isnan(result["product"]) and result["error_percent"] != float('inf')
         if is_valid:
