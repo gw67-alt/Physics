@@ -327,7 +327,7 @@ def test_algorithm(test_cases):
 
         # Use .g format specifier for potentially large numbers
         print(f"({a}, {b})".ljust(25) +
-              f"| {result['product']:<20.4g} | {result['actual_product']:<20.4g} | " +
+              f"| {result['product']:<20} | {result['actual_product']:<20} | " +
               f"{result['error_percent'] if is_valid else 'N/A':<12}" + f" | {result['confidence']:.4f}" +
               f" | {result['time_taken']:.2f}".ljust(8))
         # Optional: print debug info for high error or low confidence cases
@@ -466,18 +466,6 @@ def visualize_complex_waves(a, b):
 def generate_test_cases(num_cases=10, min_val=2, max_val=20, include_large=True):
     """Generate pairs of numbers, optionally including large ones."""
     test_cases = []
-    # Add specific cases from original code
-    test_cases.extend([(300, 500), (7, 7), (2, 10), (15, 4)]) # From user provided version
-
-    if include_large:
-        # Add cases with larger magnitudes
-        test_cases.extend([
-            (100, 200),
-            (987, 123),
-            (5000, 5001),
-            (10000, 25000),
-            (75000, 1000),
-        ])
 
     # Add random cases within standard range
     num_random = max(0, num_cases - len(test_cases))
@@ -500,7 +488,7 @@ def main():
     np.random.seed(42)
 
     # Define test cases including larger numbers
-    test_cases = generate_test_cases(num_cases=12, min_val=2, max_val=50, include_large=True)
+    test_cases = generate_test_cases(num_cases=12, min_val=2, max_val=5000000, include_large=True)
 
     print("Multiplication via Complex Wave Interference (High Number Capable - Based on User Provided Code)")
     print("=======================================================================================")
@@ -520,15 +508,7 @@ def main():
         best_case, worst_case = None, None
 
     print("\nGenerating visualizations for selected cases...")
-    # Visualize a standard case like (7, 7) or (300, 500) if they completed
-    std_case = next((r for r in results if r['factors'] == (300, 500) and r['debug_info']['status'] == 'Completed'), None)
-    if not std_case:
-        std_case = next((r for r in results if r['factors'] == (7, 7) and r['debug_info']['status'] == 'Completed'), None)
-
-    if std_case: visualize_complex_waves(std_case['factors'][0], std_case['factors'][1])
-    else: print("Skipping standard visualization as base cases might have failed.")
-
-
+    
     if best_case:
          visualize_complex_waves(best_case['factors'][0], best_case['factors'][1])
 
