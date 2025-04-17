@@ -76,54 +76,6 @@ def count_intersections(constant_freq, variable_freq, t_max, num_points=NUM_INTE
 
     return len(intersections_t), np.array(intersections_t) # Return as numpy array
 
-def is_prime(n):
-    """Check if a number is prime"""
-    if n <= 1:
-        return False
-    if n <= 3:
-        return True
-    if n % 2 == 0 or n % 3 == 0:
-        return False
-    i = 5
-    # Corrected loop condition for prime check
-    while i * i <= n:
-        if n % i == 0 or n % (i + 2) == 0:
-            return False
-        i += 6
-    return True
-
-def find_prime_by_intersections(constant_freq=1.0, max_variable_freq=100, t_max=2*np.pi):
-    """
-    Find a prime number by counting intersections between a constant sine wave
-    and variable sine waves with different frequencies.
-    """
-    print(f"Searching for prime intersection counts up to max variable frequency {max_variable_freq}...")
-    found_primes = {} # Store found primes and their corresponding frequencies
-
-    for var_freq in range(2, max_variable_freq + 1):
-        count, _ = count_intersections(constant_freq, var_freq, t_max)
-        # print(f"Freq={var_freq}, Intersections={count}") # Uncomment for debugging counts
-
-        # Check if the count is prime
-        if count > 1 and is_prime(count): # Ensure count > 1 as 1 is not prime
-            print(f"--> Found prime intersection count {count} with variable frequency {var_freq}")
-            if count not in found_primes:
-                 found_primes[count] = []
-            found_primes[count].append(var_freq)
-            # Optional: Return first found if needed
-            # return count, var_freq
-
-    if not found_primes:
-        print("No prime intersection counts found within the specified range.")
-        return None, None, None # Return None for intersections as well
-    else:
-        # Return the first prime found (smallest prime number count)
-        first_prime = min(found_primes.keys())
-        first_freq = found_primes[first_prime][0]
-        print(f"\nReturning the first prime count found: {first_prime} (from frequency {first_freq})")
-        # Recalculate intersections for the first prime found to return them
-        final_count, final_intersections = count_intersections(constant_freq, first_freq, t_max)
-        return first_prime, first_freq, final_intersections
 
 # Visualize the waves
 def plot_waves(constant_freq, variable_freq, t_max, intersections): # Pass intersections as argument
@@ -183,4 +135,4 @@ def multiply_using_amplitude_average(a, b, omega=2*np.pi, num_points=1000):
 
 # Example usage for amplitude multiplication
 print("\nTesting amplitude multiplication method:")
-multiply_using_amplitude_average(10000000, 10000000)
+multiply_using_amplitude_average(10000000, 110679718)
