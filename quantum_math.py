@@ -1,186 +1,189 @@
 import numpy as np
 import matplotlib.pyplot as plt
-from scipy.optimize import fsolve
-import sys # To exit gracefully if needed
+import sys
+import time
 
-# Define the number of points for intersection finding
-NUM_INTERSECTION_POINTS = 10000  # You can adjust this value if needed
-
-# Define the equation function outside count_intersections 
-# so fsolve can access it without scope issues if needed, though nested is fine here.
-def equation(t_val, constant_freq, variable_freq):
-    return np.sin(constant_freq * t_val) - np.sin(variable_freq * t_val)
-
-def count_intersections(constant_freq, variable_freq, t_max, num_points=NUM_INTERSECTION_POINTS):
+# Define the number of points for simulation
+NUM_SIMULATION_POINTS = 10000 # Using a good number of points for accurate derivative estimate
+PRACTICAL_FLOAT_LIMIT = 8
+def multiply_by_derivative_at_origin(a, b, num_points=NUM_SIMULATION_POINTS):
     """
-    Count the number of intersections between two sine waves:
-    - constant sine wave: sin(constant_freq * t)
-    - variable sine wave: sin(variable_freq * t)
+    Calculates a * b using the derivatives of two sine waves
+    at their t=0 intersection point.
 
-    Returns the count and the intersection points (times).
+    Args:
+        a (float): The first number (amplitude of the first wave).
+        b (float): The second number (amplitude of the second wave).
+        num_points (int): Number of points for the simulation.
+
+    Returns:
+        tuple: (calculated_product, direct_product, calculation_time_ms)
+               Returns (None, None, 0) if inputs are invalid or calculation fails.
     """
-    t = np.linspace(0, t_max, num_points)
-    wave1 = np.sin(constant_freq * t)
-    wave2 = np.sin(variable_freq * t)
+    print(f"\nCalculating {a} * {b} using derivative at intersection (t=0) method...")
+    print(f"  Using num_points = {num_points}")
 
-    # Find sign changes in the difference, which indicate potential intersections
-    diff = wave1 - wave2
-    sign_changes_indices = np.where(np.diff(np.signbit(diff)))[0]
+    # --- Input Validation ---
+    if not (np.isfinite(a) and np.isfinite(b)):
+        print("[Error: Inputs must be finite numbers.]")
+        return None, None, 0
+    # We still need limits as intermediate calculations might overflow
+    limit = np.finfo(float).max / 10
+    if abs(a) > limit or abs(b) > limit or abs(a * b) > limit :
+         print(f"[Warning: Input numbers or their product might be too large (>{limit:.1e}) for reliable float calculations. Result might be 'inf' or inaccurate.]")
+    # --- End Input Validation ---
 
-    # Refine the intersection points using fsolve
-    intersections_t = []
-    # Store unique roots to avoid duplicates if fsolve converges to the same point from nearby guesses
-    # Use a tolerance for uniqueness check
-    tolerance = 1e-8 # Increased precision for fsolve comparison
-    unique_roots_rounded = set()
+    # --- Start Timing ---
+    start_time = time.perf_counter()
 
-    # Check t=0 explicitly as sign change might miss it
-    if abs(equation(0.0, constant_freq, variable_freq)) < tolerance:
-         intersections_t.append(0.0)
-         unique_roots_rounded.add(round(0.0, 7)) # Use rounding for set uniqueness check
+    # 1. Define wave parameters
+    omega = 2 * np.pi  # Angular frequency (using 2pi makes period = 1)
+    period = 1.0
+    # We only need a small interval around t=0 to estimate the derivative accurately
+    # but we'll generate a bit more for plotting context.
+    t_max = period / 4 # Simulate for quarter period is enough for derivative at 0
+    # Ensure at least 3 points for potential higher-order derivative estimates if needed
+    if num_points < 3:
+        num_points = 3
+    t = np.linspace(0, t_max, num_points, endpoint=True) # Include t=0
+    dt = t[1] - t[0] # Time step
 
-    for idx in sign_changes_indices:
-        # Use the midpoint of the interval where sign change occurred as initial guess
-        t_approx = (t[idx] + t[idx+1]) / 2
+    # 2. Create the two waves with amplitudes a and b
+    try:
+        wave1 = a * np.sin(omega * t)
+        wave2 = b * np.sin(omega * t)
+    except (OverflowError, ValueError) as e:
+        print(f"[Error during wave generation: {e}. Inputs might be too large.]")
+        return None, None, time.perf_counter() - start_time
 
-        try:
-            # Pass additional arguments (constants) to fsolve using args=()
-            t_precise = fsolve(equation, t_approx, args=(constant_freq, variable_freq), xtol=tolerance)[0]
+    # 3. Calculate derivatives at t=0 using forward difference
+    # Ensure we have at least 2 points
+    if num_points < 2:
+        print("[Error: Need at least 2 points to calculate derivative.]")
+        return None, None, time.perf_counter() - start_time
 
-            # Check if the root is within the desired range [0, t_max]
-            # and if the function value is close to zero
-            if 0 <= t_precise <= t_max and abs(equation(t_precise, constant_freq, variable_freq)) < 1e-5:
-                 # Check for uniqueness using rounded values to handle floating point inaccuracies
-                 t_rounded = round(t_precise, 7)
-                 if t_rounded not in unique_roots_rounded:
-                    intersections_t.append(t_precise)
-                    unique_roots_rounded.add(t_rounded)
+    # Check for inf/nan before calculation
+    if not (np.isfinite(wave1[0]) and np.isfinite(wave1[1]) and np.isfinite(wave2[0]) and np.isfinite(wave2[1])):
+         print("[Error: Non-finite values detected near t=0 in input waves. Cannot calculate derivative.]")
+         return None, None, time.perf_counter() - start_time
 
-        except Exception as e:
-            # fsolve might fail in some cases, e.g., if gradient is zero
-            # print(f"fsolve warning near t={t_approx} for freq={variable_freq}: {e}")
-            pass # Silently ignore fsolve failures for this example
+    # Note: wave1[0] and wave2[0] should be 0
+    deriv1_at_0 = (wave1[1] - wave1[0]) / dt
+    deriv2_at_0 = (wave2[1] - wave2[0]) / dt
 
-    # Check t=t_max explicitly
-    if abs(equation(t_max, constant_freq, variable_freq)) < tolerance:
-        t_rounded = round(t_max, 7)
-        if t_rounded not in unique_roots_rounded:
-             intersections_t.append(t_max)
-             unique_roots_rounded.add(t_rounded)
+    # Theoretical derivatives: a*omega and b*omega
+    theoretical_deriv1 = a * omega
+    theoretical_deriv2 = b * omega
 
-    # Sort the final list of unique intersections
-    intersections_t.sort()
+    # 4. Calculate the product using the derivatives
+    # a*b = (deriv1 * deriv2) / (omega*omega)
+    try:
+        calculated_product = (deriv1_at_0 * deriv2_at_0) / (omega**2)
+    except (OverflowError, ValueError, ZeroDivisionError) as e:
+        print(f"[Error during product calculation from derivatives: {e}]")
+        return None, None, time.perf_counter() - start_time
 
-    # Filter out any points slightly outside the bounds due to numerical issues
-    intersections_t = [p for p in intersections_t if 0 <= p <= t_max]
+    # --- End Timing ---
+    end_time = time.perf_counter()
+    duration_ms = (end_time - start_time) * 1000
 
-    return len(intersections_t), np.array(intersections_t) # Return as numpy array
+    # --- Results and Performance Metrics ---
+    direct_product = a * b # Calculate direct product for comparison
 
-def is_prime(n):
-    """Check if a number is prime"""
-    if n <= 1:
-        return False
-    if n <= 3:
-        return True
-    if n % 2 == 0 or n % 3 == 0:
-        return False
-    i = 5
-    # Corrected loop condition for prime check
-    while i * i <= n:
-        if n % i == 0 or n % (i + 2) == 0:
-            return False
-        i += 6
-    return True
+    print("\n--- Results ---")
+    print(f"  Wave 1 Amplitude (a): {a}")
+    print(f"  Wave 2 Amplitude (b): {b}")
+    print(f"  Calculated derivative y1'(0): {deriv1_at_0:.6f} (Theoretical: {theoretical_deriv1:.6f})")
+    print(f"  Calculated derivative y2'(0): {deriv2_at_0:.6f} (Theoretical: {theoretical_deriv2:.6f})")
+    print(f"  Calculated Product (deriv1*deriv2 / omega^2): {calculated_product:.6f}")
+    print(f"  Direct Calculation (a * b):                 {direct_product:.6f}")
 
-def find_prime_by_intersections(constant_freq=1.0, max_variable_freq=100, t_max=2*np.pi):
-    """
-    Find a prime number by counting intersections between a constant sine wave
-    and variable sine waves with different frequencies.
-    """
-    print(f"Searching for prime intersection counts up to max variable frequency {max_variable_freq}...")
-    found_primes = {} # Store found primes and their corresponding frequencies
+    print("\n--- Performance Metrics ---")
+    print(f"  Calculation Time: {duration_ms:.4f} ms")
+    print(f"  Number of Points (num_points): {num_points}")
+    print(f"  Frequency (omega / 2pi): {omega / (2 * np.pi):.2f} Hz")
+    print(f"  Time step (dt): {dt:.2e} s")
 
-    for var_freq in range(2, max_variable_freq + 1):
-        count, _ = count_intersections(constant_freq, var_freq, t_max)
-        # print(f"Freq={var_freq}, Intersections={count}") # Uncomment for debugging counts
+    # Accuracy / Error Calculation
+    if np.isfinite(calculated_product) and np.isfinite(direct_product):
+        absolute_error = abs(direct_product - calculated_product)
+        print(f"  Absolute Error: {absolute_error:.6e}") # Use scientific notation
 
-        # Check if the count is prime
-        if count > 1 and is_prime(count): # Ensure count > 1 as 1 is not prime
-            print(f"--> Found prime intersection count {count} with variable frequency {var_freq}")
-            if count not in found_primes:
-                 found_primes[count] = []
-            found_primes[count].append(var_freq)
-            # Optional: Return first found if needed
-            # return count, var_freq
-
-    if not found_primes:
-        print("No prime intersection counts found within the specified range.")
-        return None, None, None # Return None for intersections as well
+        if abs(direct_product) > 1e-12: # Avoid division by zero
+             relative_error_percent = (absolute_error / abs(direct_product)) * 100
+             print(f"  Relative Error: {relative_error_percent:.6f} %")
+        elif abs(absolute_error) < 1e-9: # Adjusted tolerance
+             print("  Relative Error: 0.00 % (Essentially zero)")
+        else:
+             print(f"  Relative Error: N/A (Direct product is near zero, Abs Error: {absolute_error:.2e})")
     else:
-        # Return the first prime found (smallest prime number count)
-        first_prime = min(found_primes.keys())
-        first_freq = found_primes[first_prime][0]
-        print(f"\nReturning the first prime count found: {first_prime} (from frequency {first_freq})")
-        # Recalculate intersections for the first prime found to return them
-        final_count, final_intersections = count_intersections(constant_freq, first_freq, t_max)
-        return first_prime, first_freq, final_intersections
+        print("  Absolute Error: N/A (Result was inf or NaN)")
+        print("  Relative Error: N/A")
+    print("-" * 40)
+    # --- End Performance Metrics ---
 
-# Visualize the waves
-def plot_waves(constant_freq, variable_freq, t_max, intersections): # Pass intersections as argument
-    """ Plots the two waves and their intersection points """
-    t = np.linspace(0, t_max, 1000) # Use enough points for smooth plot
-    wave1 = np.sin(constant_freq * t)
-    wave2 = np.sin(variable_freq * t)
+    return calculated_product, direct_product, duration_ms
 
-    plt.figure(figsize=(10, 6))
-    plt.plot(t, wave1, label=f'sin({constant_freq}t)')
-    plt.plot(t, wave2, label=f'sin({variable_freq}t)')
-
-    if intersections is not None and len(intersections) > 0:
-        plt.scatter(intersections, np.sin(constant_freq * intersections),
-                    color='red', zorder=5, label=f'Intersections ({len(intersections)})')
-    else:
-         plt.text(0.5, 0.5, 'No intersections found or calculated', horizontalalignment='center', verticalalignment='center', transform=plt.gca().transAxes)
-
-
-    plt.grid(True)
-    plt.legend()
-    plt.title(f'Intersections of sin({constant_freq}t) and sin({variable_freq}t)')
-    plt.xlabel('t')
-    plt.ylabel('Amplitude')
-    plt.ylim(-1.1, 1.1)
-    plt.show()
 
 # --- Main Execution ---
-# Define constants
-CONSTANT_FREQ = 1.0
-MAX_VARIABLE_FREQ = 100 # Adjust as needed
-T_MAX = 2 * np.pi
+if __name__ == "__main__":
+    points = NUM_SIMULATION_POINTS
+    if len(sys.argv) > 1:
+        try:
+            points_arg = int(sys.argv[1])
+            if points_arg > 1: # Need at least 2 points for derivative
+                points = points_arg
+                print(f"[ Using num_points = {points} from command line ]")
+            else:
+                print(f"Number of points must be > 1. Using default {points}.")
+        except ValueError:
+            print(f"[ Warning: Invalid command line argument '{sys.argv[1]}'. Using default num_points = {points}. ]")
 
-print(f"Comparing sin({CONSTANT_FREQ}t) against sin(f*t) for f = 2 to {MAX_VARIABLE_FREQ}")
-print(f"Interval: t = [0, {T_MAX:.4f}]")
-print(f"Number of points for intersection detection: {NUM_INTERSECTION_POINTS}")
+    print("\nThis script demonstrates multiplication (a * b) using the derivatives")
+    print(f"of a*sin(ωt) and b*sin(ωt) at the intersection t=0.")
+    print(f"It calculates a*b = [y1'(0) * y2'(0)] / ω^2.")
+    print(f"Standard float limits apply (approx {PRACTICAL_FLOAT_LIMIT:.0e}).")
 
-# --- Section for Multiplication using Amplitude (from previous request) ---
-# This part remains separate as it addresses a different concept
+    while True:
+        try:
+            a_str = input(f"Enter the first number (a): ")
+            if a_str.lower() == 'exit': sys.exit()
+            A = float(a_str) # Validate standard float conversion first
 
-def multiply_using_amplitude_average(a, b, omega=2*np.pi, num_points=1000):
-    """ Calculates a*b using the average of wave products. """
-    print(f"\n--- Amplitude Multiplication Example ---")
-    print(f"Calculating {a} * {b}")
-    t = np.linspace(0, 2*np.pi/omega, num_points, endpoint=False)
-    wave1 = a * np.sin(omega * t)
-    wave2 = b * np.sin(omega * t)
-    product_wave = wave1 * wave2
-    average_value = np.mean(product_wave)
-    calculated_product = 2 * average_value
-    print(f"  Wave 1 Amplitude: {a}")
-    print(f"  Wave 2 Amplitude: {b}")
-    print(f"  Average of Product Wave: {average_value:.4f}")
-    print(f"  Calculated Product (2 * Average): {calculated_product:.4f}")
-    print(f"  Actual Product (a * b): {a * b}")
-    print("-" * 40)
+            b_str = input(f"Enter the second number (b): ")
+            if b_str.lower() == 'exit': sys.exit()
+            B = float(b_str) # Validate standard float conversion first
 
-# Example usage for amplitude multiplication
-print("\nTesting amplitude multiplication method:")
-multiply_using_amplitude_average(5, 7)
+            # --- Input Validation (check for Inf/NaN from input conversion) ---
+            if not (np.isfinite(A) and np.isfinite(B)):
+                print("\n[Error: Inputs must be finite numbers (not Inf or NaN). Please try again.]")
+                continue
+            # ----------------------
+
+            # Call the function
+            result_tuple = multiply_by_derivative_at_origin(A, B, num_points=points)
+
+            if result_tuple[0] is None: # Check if function indicated an error during calculation
+                print("[Calculation failed, please check input values or potential overflow warnings.]")
+                continue
+
+            calc_prod, direct_prod, _ = result_tuple
+            # Check if calculation itself resulted in inf/nan
+            if not np.isfinite(calc_prod):
+                 print("\n[ Note: The calculation resulted in non-finite values (inf/nan). ]")
+                 print("[ This can happen if input numbers are too large for standard floats. ]")
+
+        except ValueError:
+            print("Invalid input. Please enter numerical values (e.g., 123.45 or 1.23e100) or type 'exit'.")
+        except KeyboardInterrupt:
+             sys.exit("\nExiting.")
+        except Exception as e:
+            print(f"\nAn unexpected error occurred in the main loop: {e}")
+            import traceback
+            traceback.print_exc() # Print detailed traceback for debugging
+
+        try_again = input("\nTry another multiplication? (yes/no): ").lower()
+        if try_again not in ['yes', 'y']:
+            break
+
+    print("\nDone.")
