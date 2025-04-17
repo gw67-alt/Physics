@@ -203,7 +203,7 @@ def complex_wave_multiplication(a, b):
     
     # For validation only - calculate actual product using addition
     actual_product = calculate_product(a, b)
-    
+    estimated_product = (estimated_product/confidence)/2
     # Calculate error (for validation only)
     absolute_error = abs(estimated_product - actual_product)
     relative_error = absolute_error * 100 / actual_product if actual_product != 0 else 0
@@ -338,7 +338,7 @@ def visualize_complex_waves(a, b):
     
     print(f"Phase visualization saved to complex_wave_phase_{a}_{b}.png")
 
-def generate_test_cases(num_cases=10, min_val=2, max_val=100000):
+def generate_test_cases(num_cases=10, min_val=2, max_val=100000000):
     """Generate random pairs of numbers for test cases."""
     test_cases = []
     for _ in range(num_cases):
