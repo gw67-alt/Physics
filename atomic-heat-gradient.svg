@@ -318,7 +318,7 @@
     <text x="60" y="20" font-family="Arial" font-size="12" fill="#ffffff" text-anchor="middle" font-weight="bold">Specifications</text>
     
     <text x="10" y="33" font-family="Arial" font-size="10" fill="#ffffff">Wavelength: 750-1400nm</text>
-    <text x="10" y="45" font-family="Arial" font-size="10" fill="#ffffff">Power: 150-300W</text>
+    <text x="10" y="45" font-family="Arial" font-size="10" fill="#ffffff">Power: 1-5mW</text>
     <text x="10" y="60" font-family="Arial" font-size="10" fill="#ffffff">Line width: 20-100µm</text>
     <text x="10" y="75" font-family="Arial" font-size="10" fill="#ffffff">Process time: 0.5-3s</text>
   </g>
