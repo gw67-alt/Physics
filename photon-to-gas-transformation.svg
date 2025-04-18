@@ -102,7 +102,7 @@
   </defs>
   
   <text x="380" y="300" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666666" font-style="italic">
-	Free Photons (Φ > 0, ∇Λ ≈ 0, Ω ≈ 0): Photons exist as pure energy waves with no positional stability, traveling at light speed.
+	Free Photons (Φ > 0, ∇Λ ≈ 0, Ω ≈ 0): Photons exist as pure energy waves with positional stability, traveling at light speed.
   </text>
   
   
@@ -120,7 +120,7 @@
   
   
   <text x="380" y="420" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666666" font-style="italic">
-	while maintaining their energy. This results in gas-like behavior where photons remain in defined spatial regions while
+	while displacing their energy. This results in 2D gas-like behavior where photons move in defined spatial regions,
   </text>
   
   <text x="380" y="450" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666666" font-style="italic">
@@ -128,7 +128,7 @@
   </text>
   <!-- Footer note -->
   <text x="380" y="470" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="#666666" font-style="italic">
-    The momentum sinkhole equation describes how opposing forces create stable positional states,
+    The momentum sinkhole equation describes how opposing forces create nonstable positional states,
     
   </text>
   
