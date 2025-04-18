@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f5f5f5"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" text-anchor="middle" font-family="Arial" font-size="20" font-weight="bold">Oxide Mirror with Radiation-Induced Oxygen Vacancies</text>
+  
+  <!-- Oxide Mirror Structure -->
+  <rect x="100" y="100" width="600" height="200" fill="#d1e0f0" stroke="#2c3e50" stroke-width="2"/>
+  
+  <!-- Lattice structure -->
+  <g id="lattice">
+    <!-- Vertical lines -->
+    <line x1="150" y1="100" x2="150" y2="300" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+    <line x1="200" y1="100" x2="200" y2="300" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+    <line x1="250" y1="100" x2="250" y2="300" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+    <line x1="300" y1="100" x2="300" y2="300" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+    <line x1="350" y1="100" x2="350" y2="300" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+    <line x1="400" y1="100" x2="400" y2="300" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+    <line x1="450" y1="100" x2="450" y2="300" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+    <line x1="500" y1="100" x2="500" y2="300" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+    <line x1="550" y1="100" x2="550" y2="300" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+    <line x1="600" y1="100" x2="600" y2="300" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+    <line x1="650" y1="100" x2="650" y2="300" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+    
+    <!-- Horizontal lines -->
+    <line x1="100" y1="150" x2="700" y2="150" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+    <line x1="100" y1="200" x2="700" y2="200" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+    <line x1="100" y1="250" x2="700" y2="250" stroke="#2c3e50" stroke-width="1" stroke-dasharray="5,5"/>
+  </g>
+  
+  <!-- Atoms -->
+  <g id="atoms">
+    <!-- Metal atoms (e.g., Ti, Si) - larger circles -->
+    <circle cx="150" cy="150" r="10" fill="#6c7ae0"/>
+    <circle cx="150" cy="200" r="10" fill="#6c7ae0"/>
+    <circle cx="150" cy="250" r="10" fill="#6c7ae0"/>
+    
+    <circle cx="200" cy="150" r="10" fill="#6c7ae0"/>
+    <circle cx="200" cy="200" r="10" fill="#6c7ae0"/>
+    <circle cx="200" cy="250" r="10" fill="#6c7ae0"/>
+    
+    <circle cx="250" cy="150" r="10" fill="#6c7ae0"/>
+    <circle cx="250" cy="200" r="10" fill="#6c7ae0"/>
+    <circle cx="250" cy="250" r="10" fill="#6c7ae0"/>
+    
+    <circle cx="300" cy="150" r="10" fill="#6c7ae0"/>
+    <circle cx="300" cy="200" r="10" fill="#6c7ae0"/>
+    <circle cx="300" cy="250" r="10" fill="#6c7ae0"/>
+    
+    <circle cx="350" cy="150" r="10" fill="#6c7ae0"/>
+    <circle cx="350" cy="200" r="10" fill="#6c7ae0"/>
+    <circle cx="350" cy="250" r="10" fill="#6c7ae0"/>
+    
+    <circle cx="400" cy="150" r="10" fill="#6c7ae0"/>
+    <circle cx="400" cy="200" r="10" fill="#6c7ae0"/>
+    <circle cx="400" cy="250" r="10" fill="#6c7ae0"/>
+    
+    <circle cx="450" cy="150" r="10" fill="#6c7ae0"/>
+    <circle cx="450" cy="200" r="10" fill="#6c7ae0"/>
+    <circle cx="450" cy="250" r="10" fill="#6c7ae0"/>
+    
+    <circle cx="500" cy="150" r="10" fill="#6c7ae0"/>
+    <circle cx="500" cy="200" r="10" fill="#6c7ae0"/>
+    <circle cx="500" cy="250" r="10" fill="#6c7ae0"/>
+    
+    <circle cx="550" cy="150" r="10" fill="#6c7ae0"/>
+    <circle cx="550" cy="200" r="10" fill="#6c7ae0"/>
+    <circle cx="550" cy="250" r="10" fill="#6c7ae0"/>
+    
+    <circle cx="600" cy="150" r="10" fill="#6c7ae0"/>
+    <circle cx="600" cy="200" r="10" fill="#6c7ae0"/>
+    <circle cx="600" cy="250" r="10" fill="#6c7ae0"/>
+    
+    <circle cx="650" cy="150" r="10" fill="#6c7ae0"/>
+    <circle cx="650" cy="200" r="10" fill="#6c7ae0"/>
+    <circle cx="650" cy="250" r="10" fill="#6c7ae0"/>
+    
+    <!-- Oxygen atoms - smaller circles -->
+    <circle cx="175" cy="125" r="6" fill="#e74c3c"/>
+    <circle cx="175" cy="175" r="6" fill="#e74c3c"/>
+    <circle cx="175" cy="225" r="6" fill="#e74c3c"/>
+    <circle cx="175" cy="275" r="6" fill="#e74c3c"/>
+    
+    <circle cx="225" cy="125" r="6" fill="#e74c3c"/>
+    <circle cx="225" cy="175" r="6" fill="#e74c3c"/>
+    <circle cx="225" cy="225" r="6" fill="#e74c3c"/>
+    <circle cx="225" cy="275" r="6" fill="#e74c3c"/>
+    
+    <circle cx="275" cy="125" r="6" fill="#e74c3c"/>
+    <circle cx="275" cy="175" r="6" fill="#e74c3c"/>
+    <!-- Oxygen vacancy -->
+    <circle cx="275" cy="225" r="6" fill="none" stroke="#e74c3c" stroke-width="1" stroke-dasharray="2,2"/>
+    <circle cx="275" cy="225" r="8" fill="#f39c12" fill-opacity="0.3"/>
+    <circle cx="275" cy="275" r="6" fill="#e74c3c"/>
+    
+    <circle cx="325" cy="125" r="6" fill="#e74c3c"/>
+    <circle cx="325" cy="175" r="6" fill="#e74c3c"/>
+    <circle cx="325" cy="225" r="6" fill="#e74c3c"/>
+    <circle cx="325" cy="275" r="6" fill="#e74c3c"/>
+    
+    <circle cx="375" cy="125" r="6" fill="#e74c3c"/>
+    <!-- Oxygen vacancy -->
+    <circle cx="375" cy="175" r="6" fill="none" stroke="#e74c3c" stroke-width="1" stroke-dasharray="2,2"/>
+    <circle cx="375" cy="175" r="8" fill="#f39c12" fill-opacity="0.3"/>
+    <circle cx="375" cy="225" r="6" fill="#e74c3c"/>
+    <circle cx="375" cy="275" r="6" fill="#e74c3c"/>
+    
+    <circle cx="425" cy="125" r="6" fill="#e74c3c"/>
+    <circle cx="425" cy="175" r="6" fill="#e74c3c"/>
+    <circle cx="425" cy="225" r="6" fill="#e74c3c"/>
+    <circle cx="425" cy="275" r="6" fill="#e74c3c"/>
+    
+    <circle cx="475" cy="125" r="6" fill="#e74c3c"/>
+    <circle cx="475" cy="175" r="6" fill="#e74c3c"/>
+    <circle cx="475" cy="225" r="6" fill="#e74c3c"/>
+    <!-- Oxygen vacancy -->
+    <circle cx="475" cy="275" r="6" fill="none" stroke="#e74c3c" stroke-width="1" stroke-dasharray="2,2"/>
+    <circle cx="475" cy="275" r="8" fill="#f39c12" fill-opacity="0.3"/>
+    
+    <circle cx="525" cy="125" r="6" fill="#e74c3c"/>
+    <circle cx="525" cy="175" r="6" fill="#e74c3c"/>
+    <circle cx="525" cy="225" r="6" fill="#e74c3c"/>
+    <circle cx="525" cy="275" r="6" fill="#e74c3c"/>
+    
+    <circle cx="575" cy="125" r="6" fill="#e74c3c"/>
+    <circle cx="575" cy="175" r="6" fill="#e74c3c"/>
+    <circle cx="575" cy="225" r="6" fill="#e74c3c"/>
+    <circle cx="575" cy="275" r="6" fill="#e74c3c"/>
+    
+    <circle cx="625" cy="125" r="6" fill="#e74c3c"/>
+    <circle cx="625" cy="175" r="6" fill="#e74c3c"/>
+    <circle cx="625" cy="225" r="6" fill="#e74c3c"/>
+    <circle cx="625" cy="275" r="6" fill="#e74c3c"/>
+    
+    <circle cx="675" cy="125" r="6" fill="#e74c3c"/>
+    <circle cx="675" cy="175" r="6" fill="#e74c3c"/>
+    <circle cx="675" cy="225" r="6" fill="#e74c3c"/>
+    <circle cx="675" cy="275" r="6" fill="#e74c3c"/>
+  </g>
+  
+  <!-- Incident Radiation -->
+  <g id="radiation">
+    <line x1="50" y1="150" x2="100" y2="150" stroke="#e67e22" stroke-width="2"/>
+    <polygon points="100,150 90,145 90,155" fill="#e67e22"/>
+    <text x="60" y="140" font-family="Arial" font-size="12">Radiation</text>
+  </g>
+  
+  <!-- Wavefunction -->
+  <g id="wavefunction">
+    <!-- Incident wavefunction -->
+    <path d="M 50,350 Q 100,320 150,350 Q 200,380 250,350" stroke="#3498db" stroke-width="3" fill="none"/>
+    <text x="150" y="410" text-anchor="middle" font-family="Arial" font-size="14">Incident Wavefunction</text>
+    
+    <!-- Partially collapsed wavefunction -->
+    <path d="M 350,350 Q 400,340 450,350 Q 500,360 550,350 Q 600,340 650,350" stroke="#3498db" stroke-width="3" fill="none" stroke-dasharray="10,4"/>
+    <text x="500" y="410" text-anchor="middle" font-family="Arial" font-size="14">Partially Collapsed Wavefunction</text>
+    
+    <!-- Arrow -->
+    <line x1="280" y1="350" x2="320" y2="350" stroke="#2c3e50" stroke-width="2"/>
+    <polygon points="320,350 310,345 310,355" fill="#2c3e50"/>
+  </g>
+  
+  <!-- Legend -->
+  <g id="legend" transform="translate(100, 440)">
+    <circle cx="10" cy="10" r="10" fill="#6c7ae0"/>
+    <text x="25" y="15" font-family="Arial" font-size="12">Metal Atom</text>
+    
+    <circle cx="120" cy="10" r="6" fill="#e74c3c"/>
+    <text x="135" y="15" font-family="Arial" font-size="12">Oxygen Atom</text>
+    
+    <circle cx="250" cy="10" r="6" fill="none" stroke="#e74c3c" stroke-width="1" stroke-dasharray="2,2"/>
+    <circle cx="250" cy="10" r="8" fill="#f39c12" fill-opacity="0.3"/>
+    <text x="265" y="15" font-family="Arial" font-size="12">Oxygen Vacancy (Absorption Center)</text>
+  </g>
+
+  <!-- Interaction at one of the vacancies -->
+  <g id="vacancy-interaction">
+    <!-- Highlight one vacancy -->
+    <circle cx="375" cy="175" r="12" fill="none" stroke="#e74c3c" stroke-width="1" stroke-dasharray="2,2"/>
+    
+    <!-- Animation lines representing interaction -->
+    <circle cx="375" cy="175" r="16" fill="none" stroke="#f39c12" stroke-width="1"/>
+    <circle cx="375" cy="175" r="24" fill="none" stroke="#f39c12" stroke-width="1" stroke-opacity="0.7"/>
+    <circle cx="375" cy="175" r="32" fill="none" stroke="#f39c12" stroke-width="1" stroke-opacity="0.4"/>
+    
+    <!-- Text explanation -->
+    <text x="400" y="175" font-family="Arial" font-size="12">Wavefunction</text>
+    <text x="400" y="190" font-family="Arial" font-size="12">Interaction</text>
+  </g>
+</svg>
