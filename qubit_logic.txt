@@ -1,1 +1,1 @@
-Two parallel qubits can be programmed via charge and sent to the sum qubit via the hammard transform, sense the sum with a fourth qubit.
+Two parallel qubits can be programmed via charge and sent to the sum qubit via the hadamard transform, sense the sum with a fourth qubit.
