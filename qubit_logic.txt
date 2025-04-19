@@ -1,3 +1,1 @@
-XOR/AND/OR/NOT qubit logic gates.
-
-Two atoms can be programmed by one atom via energy variations, sense the sum with a fourth atom. Entangle with cooling. It must be cool or it'd be difficult getting them to communicate.
+Two qubits can be programmed by one qubit via energy variations, sense the sum with a fourth qubit, capable of (XOR/AND/OR/NOT).
