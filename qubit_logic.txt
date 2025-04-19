@@ -1,1 +1,1 @@
-Two qubits can be programmed by one qubit via energy variations, sense the sum with a fourth qubit, capable of (XOR/AND/OR/NOT).
+Two parallel qubits can be programmed via charge and sent to the sum qubit via the hammard transform, sense the sum with a fourth qubit.
