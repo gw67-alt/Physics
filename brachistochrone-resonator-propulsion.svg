@@ -154,7 +154,7 @@
       <text x="30" y="65" font-family="Arial, sans-serif" font-size="14" fill="#8892b0">propulsion systems</text>
     </g>
     
-    <g transform="translate(230, 30)">
+    <g transform="translate(300, 30)">
       <!-- Acceleration -->
       <circle cx="0" cy="0" r="15" fill="none" stroke="#64ffda" stroke-width="2" />
       <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#64ffda">2</text>
@@ -164,7 +164,7 @@
       <text x="30" y="65" font-family="Arial, sans-serif" font-size="14" fill="#8892b0">transfer</text>
     </g>
     
-    <g transform="translate(430, 30)">
+    <g transform="translate(580, 30)">
       <!-- Applications -->
       <circle cx="0" cy="0" r="15" fill="none" stroke="#64ffda" stroke-width="2" />
       <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#64ffda">3</text>
@@ -174,15 +174,7 @@
       <text x="30" y="65" font-family="Arial, sans-serif" font-size="14" fill="#8892b0">deep space probes</text>
     </g>
     
-    <g transform="translate(630, 30)">
-      <!-- Future Tech -->
-      <circle cx="0" cy="0" r="15" fill="none" stroke="#64ffda" stroke-width="2" />
-      <text x="0" y="5" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#64ffda">4</text>
-      <text x="30" y="5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ccd6f6">Next-Gen Potential</text>
-      <text x="30" y="25" font-family="Arial, sans-serif" font-size="14" fill="#8892b0">Scalable for antimatter</text>
-      <text x="30" y="45" font-family="Arial, sans-serif" font-size="14" fill="#8892b0">catalyzed fusion and</text>
-      <text x="30" y="65" font-family="Arial, sans-serif" font-size="14" fill="#8892b0">exotic propellants</text>
-    </g>
+   
   </g>
   
   <!-- Footer -->
