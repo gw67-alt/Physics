@@ -161,7 +161,7 @@
       <text x="30" y="5" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#ccd6f6">Optimal Acceleration</text>
       <text x="30" y="25" font-family="Arial, sans-serif" font-size="14" fill="#8892b0">Time-optimized particle</text>
       <text x="30" y="45" font-family="Arial, sans-serif" font-size="14" fill="#8892b0">paths maximize momentum</text>
-      <text x="30" y="65" font-family="Arial, sans-serif" font-size="14" fill="#8892b0">transfer in propellant</text>
+      <text x="30" y="65" font-family="Arial, sans-serif" font-size="14" fill="#8892b0">transfer</text>
     </g>
     
     <g transform="translate(430, 30)">
