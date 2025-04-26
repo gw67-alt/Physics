@@ -4,7 +4,7 @@
   
   <!-- Source -->
   <circle cx="60" cy="200" r="15" fill="orange" stroke="black" stroke-width="1"/>
-  <text x="25" y="245" font-family="Arial" font-size="14" text-anchor="middle">Source</text>
+  <text x="65" y="245" font-family="Arial" font-size="14" text-anchor="middle">Photon Source</text>
   
   <!-- Barrier -->
   <rect x="180" y="150" width="40" height="100" fill="#888" fill-opacity="0.7" stroke="black" stroke-width="1"/>
