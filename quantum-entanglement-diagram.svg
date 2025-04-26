@@ -1,0 +1,46 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect x="0" y="0" width="800" height="500" fill="#f0f0f0" rx="10" ry="10"/>
+  
+  <!-- Source -->
+  <circle cx="60" cy="200" r="15" fill="orange" stroke="black" stroke-width="1"/>
+  <text x="25" y="245" font-family="Arial" font-size="14" text-anchor="middle">Source</text>
+  
+  <!-- Barrier -->
+  <rect x="180" y="150" width="40" height="100" fill="#888" fill-opacity="0.7" stroke="black" stroke-width="1"/>
+  <text x="200" y="145" font-family="Arial" font-size="14" text-anchor="middle">Barrier</text>
+  
+  <!-- Transparent Wall Label -->
+  <text x="290" y="200" font-family="Arial" font-size="12" text-anchor="middle">Transparent Wall</text>
+  
+  <!-- Path Line -->
+  <line x1="75" y1="200" x2="180" y2="200" stroke="orange" stroke-width="2"/>
+  
+  <!-- Matter Wave (Blocked) -->
+  <path d="M220 180 Q230 175, 240 180 Q250 185, 260 180" stroke="blue" stroke-width="2" fill="none"/>
+  <text x="270" y="180" font-family="Arial" font-size="12" fill="#964B00" text-anchor="start">Matter Wave (Blocked)</text>
+  
+  <!-- Energy Wave (Passes) -->
+  <path d="M220 220 Q230 215, 240 220 Q250 225, 260 220" stroke="green" stroke-width="2" fill="none"/>
+  <text x="270" y="220" font-family="Arial" font-size="12" fill="#006400" text-anchor="start">Energy Wave (Passes)</text>
+  
+  <!-- Detection Screen -->
+  <rect x="400" y="120" width="180" height="160" fill="#ddd" stroke="black" stroke-width="1"/>
+  <text x="490" y="110" font-family="Arial" font-size="14" text-anchor="middle">Detection Screen</text>
+  
+  <!-- Interference Pattern -->
+  <path d="M420 150 Q440 145, 460 155 Q480 165, 500 155 Q520 145, 540 155 Q560 165, 580 155" stroke="green" stroke-width="2" fill="none"/>
+  <path d="M420 180 Q440 175, 460 185 Q480 195, 500 185 Q520 175, 540 185 Q560 195, 580 185" stroke="green" stroke-width="2" fill="none"/>
+  <path d="M420 210 Q440 205, 460 215 Q480 225, 500 215 Q520 205, 540 215 Q560 225, 580 215" stroke="green" stroke-width="2" fill="none"/>
+  <path d="M420 240 Q440 235, 460 245 Q480 255, 500 245 Q520 235, 540 245 Q560 255, 580 245" stroke="green" stroke-width="2" fill="none"/>
+  
+  <text x="490" y="270" font-family="Arial" font-size="14" text-anchor="middle">Interference Pattern</text>
+  
+  <!-- Entanglement Section -->
+  <rect x="100" y="330" width="600" height="150" fill="#e6f7ff" stroke="#0066cc" stroke-width="1" rx="10" ry="10"/>
+  <text x="400" y="350" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle">Quantum Entanglement vs. Interference</text>
+  
+  <!-- Entanglement Information -->
+  <text x="120" y="425" font-family="Arial" font-size="14" text-anchor="start">• Entangled particles show correlated properties with non-transduced energy.</text>
+  
+</svg>
