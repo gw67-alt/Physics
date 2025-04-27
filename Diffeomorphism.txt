@@ -1,0 +1,1 @@
+Diffeomorphic volume above a sphere surface should determine infinitely differentiable probability.
