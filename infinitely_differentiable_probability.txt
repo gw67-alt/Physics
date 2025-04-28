@@ -1,0 +1,26 @@
+Diffeomorphic volume above a sphere surface should determine infinitely differentiable probability.
+
+The Schwinger-Dyson Equations (SDEs) are a powerful and fundamental concept in quantum field theory (QFT). Physically, they can be understood as the equations of motion for the quantum fields themselves, but generalized to include all quantum effects. Instead of just describing how classical fields evolve, they tell us how the full quantum field operators behave, taking into account the creation and annihilation of virtual particles and their interactions.
+
+Here's a breakdown of the physical significance:
+
+Quantum Equations of Motion: In classical field theory, the equations of motion (like Maxwell's equations for electromagnetism) are derived from the principle of least action. The SDEs are the quantum analogues of these classical equations of motion. They arise from the fact that the quantum path integral should be invariant under a change of integration variables. This leads to relationships between different correlation functions (also known as Green's functions), which are vacuum expectation values of time-ordered products of field operators. These correlation functions encode all the information about the quantum field theory, including particle properties and interactions.   
+
+ Relating n-point to (n+1)-point Functions: A key feature of the SDEs is that they form an infinite tower of coupled equations. The equation for an n-point correlation function (involving n field operators) is typically related to (n+1)-point (or even higher) correlation functions. Physically, this reflects the fact that when you probe a quantum field at n points, the interactions within the field can lead to the creation or absorption of virtual particles at another point, thus connecting n-point processes to those involving more particles.   
+
+Non-Perturbative Nature: Unlike Feynman diagrams, which are based on a perturbative expansion in the coupling constant (assuming weak interactions), the SDEs are exact, non-perturbative relations. They hold regardless of the strength of the interactions. This makes them particularly valuable for studying phenomena where perturbative methods fail, such as in strongly coupled theories like quantum chromodynamics (QCD) at low energies (relevant for understanding the structure of hadrons).
+
+Self-Consistency: The SDEs often appear as self-referential equations for fundamental objects like the propagator (the two-point correlation function, describing the propagation of a particle) and the vertex function (describing the interaction between particles). For example, the SDE for the electron propagator in quantum electrodynamics (QED) will involve the photon propagator and the electron-photon vertex. These equations describe how the quantum fluctuations and interactions modify the "bare" properties of particles, leading to physical quantities like the observed mass and charge.
+
+ Diagrammatic Interpretation: While non-perturbative, the SDEs have a close connection to Feynman diagrams. An SDE can be thought of as a compact way of representing an infinite sum of Feynman diagrams. For instance, the SDE for the full propagator can be represented diagrammatically as the bare propagator plus all possible loop corrections involving interactions.   
+
+Understanding Interactions: The SDEs provide a framework for understanding how particles and fields interact with each other at a fundamental level. They show how the interactions modify the propagation of particles and how the interaction vertices themselves are affected by quantum corrections.
+
+Applications: SDEs have numerous applications in various areas of physics:
+
+Particle Physics: Studying the non-perturbative aspects of QCD, such as chiral symmetry breaking and hadron properties. They are also used in QED and electroweak theory.   
+Condensed Matter Physics: Investigating strongly correlated electron systems, superconductivity, and other phenomena where interactions are crucial.
+Statistical Physics: Analyzing critical phenomena and phase transitions.
+In essence, the Schwinger-Dyson Equations are a powerful tool that allows us to go beyond simple pictures of particles and their interactions and delve into the complex, fluctuating reality of quantum fields. They provide a way to understand how quantum effects fundamentally alter the behavior of matter and forces.
+
+However, solving the infinite tower of coupled SDEs is generally a very difficult task. In practice, physicists often use truncation schemes and approximations to extract physical information from them. These approximations aim to capture the most important physical effects while making the equations solvable.
