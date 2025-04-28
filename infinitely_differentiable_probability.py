@@ -79,13 +79,12 @@ def number_guessing_game():
             attempts_label.config(text=f"Attempts: {attempts}/{max_attempts}")
             result_label.config(text=game_state["target_number"], foreground="#FF9800") # Orange
             game_state["target_number"] = random.randint(game_state["min_value"], game_state["max_value"])
-          
             if guess == target_number:
                 result_label.config(text=f"CORRECT! You guessed {target_number} in {attempts} tries!", foreground="#4CAF50") # Green
                 check_button.config(state=tk.DISABLED)
                 slider.config(state=tk.DISABLED)
-
-              if attempts >= max_attempts and guess != target_number:
+                
+            if attempts >= max_attempts and guess != target_number:
                 result_label.config(text=f"No more attempts! The number was {target_number}.", foreground="#F44336") # Red
                 check_button.config(state=tk.DISABLED)
                 slider.config(state=tk.DISABLED)
