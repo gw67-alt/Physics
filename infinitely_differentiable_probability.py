@@ -3,7 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox  # Import messagebox for error popups
 import random
 import math # Import math for calculating max_attempts
-
+random.seed(42)
 def number_guessing_game():
     """
     Creates a Tkinter window for a number guessing game with a variable range,
