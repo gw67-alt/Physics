@@ -1,4 +1,4 @@
-Diffeomorphic volume above a sphere surface should determine infinitely differentiable probability, do this via altering focus depth of an optical system then measuring the diffeomorphism between the focused and non focused areas of an LCD array photons.
+Diffeomorphic volume above a sphere surface should determine infinitely differentiable probability, do this via altering focus depth of an optical system then measuring the diffeomorphism between the focused and non focused areas of LCD array photons.
 
 The Schwinger-Dyson Equations (SDEs) are a powerful and fundamental concept in quantum field theory (QFT). Physically, they can be understood as the equations of motion for the quantum fields themselves, but generalized to include all quantum effects. Instead of just describing how classical fields evolve, they tell us how the full quantum field operators behave, taking into account the creation and annihilation of virtual particles and their interactions.
 
